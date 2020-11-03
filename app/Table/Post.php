@@ -2,8 +2,15 @@
 
 namespace App\Table;
 
+use App\App;
+
 class Post{
 
+    public static function getLast(){
+
+      return App::getDb()->query('SELECT id, title, content, category.name as categorie FROM post LEFT JOIN category ON category_id = category.id ', __CLASS__);
+
+    }
     
     public function __get($key){
 
