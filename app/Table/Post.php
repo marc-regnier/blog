@@ -8,10 +8,12 @@ class Post extends Table{
 
     public static function getLast(){
 
-      return App::getDb()->query("SELECT post.id, post.title, post.content, category.name as categorie FROM post LEFT JOIN category ON post.category_id = category.id ", __CLASS__);
+      return App::getDb()->query ("SELECT post.id, post.title, post.content, categories.name as categorie 
+      FROM post 
+      LEFT JOIN categories
+        ON category_id = categories.id ", __CLASS__);
 
     }
-    
     
 
     

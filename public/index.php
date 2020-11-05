@@ -15,10 +15,6 @@ if(isset($_GET['p'])){
 
 }
 
-// Initialisation des objets
-
-$db = new App\Database('blog');
-
 ob_start();
 
 if($p === 'home'){
@@ -29,6 +25,9 @@ if($p === 'home'){
 
     require '../pages/single.php';
 
+} else if ($p === 'category'){
+
+    require '../category.php';
 }
 
 $content = ob_get_clean();

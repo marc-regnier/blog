@@ -6,6 +6,8 @@
 
             <h2><a href="<?= $post->url; ?>"><?= $post->title ?></a></h2>
 
+            <p><em><?= $post->categorie ?></em></p>
+
             <p><?= $post->extract; ?></p>
 
 
@@ -18,9 +20,9 @@
         <ul>
             <?php
             
-            foreach (\App\Table\Category::all() as $categorie): ?>
+            foreach (\App\Table\Category::all() as $category): ?>
 
-                <li><a href="'<?= $categorie->url; ?>'"><?= $categorie->name; ?></li>
+                <li><a href="<?= $category->url; ?>"><?= $category->name; ?></a></li>
 
             <?php endforeach; ?>
 
