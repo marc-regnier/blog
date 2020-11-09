@@ -1,30 +1,34 @@
+
 <div class="row">
     <div class="col-sm-8">
+<?php
+    
+    require '../app/Post.php';
+    $post = new Post();
+    $posts = $post->getPosts();
+    while($post = $posts->fetch())
+    {
+        ?>
+        <div>
+            <h2><a href="index.php?p=post&id=<?= htmlspecialchars($post->id);?>"><?= htmlspecialchars($post->title);?></a></h2>
+            <p><?= htmlspecialchars($post->content);?></p>
+            <p>Créé le : <?= htmlspecialchars($post->createdAt);?></p>
+        </div>
+        <br>
         <?php
+    }
+    $posts->closeCursor();
+    ?>
+</div>
 
-        foreach (\App\Table\Post::getLast() as $post): ?>
-
-            <h2><a href="<?= $post->url; ?>"><?= $post->title ?></a></h2>
-
-            <p><em><?= $post->categorie ?></em></p>
-
-            <p><?= $post->extract; ?></p>
-
-
-        <?php endforeach; ?>
 
     </div>
-
+       
     <div class="col-sm-4">
 
         <ul>
-            <?php
-            
-            foreach (\App\Table\Category::all() as $category): ?>
 
-                <li><a href="<?= $category->url; ?>"><?= $category->name; ?></a></li>
-
-            <?php endforeach; ?>
+                <li><a href=""></a></li>
 
         </ul>
 

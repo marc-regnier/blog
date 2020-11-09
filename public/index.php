@@ -25,9 +25,6 @@ if($p === 'home'){
 
     require '../pages/single.php';
 
-} else if ($p === 'category'){
-
-    require '../category.php';
 }
 
 $content = ob_get_clean();
