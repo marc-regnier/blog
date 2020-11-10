@@ -1,10 +1,6 @@
 <?php
 
-require '../config/Autoloader.php';
-
-use App\config\Autoloader;
-
-Autoloader::register();
+require '../vendor/autoload.php';
 
 
 if(isset($_GET['p'])){
