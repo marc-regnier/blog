@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\src\DAO;
 
 use Exception;
 use \PDO;
 
 
-abstract class Database
+abstract class DAO
 {
 
 

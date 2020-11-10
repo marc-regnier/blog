@@ -1,8 +1,10 @@
 <?php
 
-require '../app/Autoloader.php';
+require '../config/Autoloader.php';
 
-App\Autoloader::register();
+use App\config\Autoloader;
+
+Autoloader::register();
 
 
 if(isset($_GET['p'])){
@@ -19,14 +21,14 @@ ob_start();
 
 if($p === 'home'){
 
-    require '../pages/home.php';
+    require '../templates/home.php';
 
 } else if($p === 'post'){
 
-    require '../pages/single.php';
+    require '../templates/single.php';
 
 }
 
 $content = ob_get_clean();
 
-require '../pages/templates/default.php';
+require '../templates/default.php';
