@@ -1,10 +1,5 @@
 <?php
 
-use App\src\DAO\Post;
-use App\src\DAO\Comment;
-
-$post = new Post();
-$posts = $post->getPost($_GET['id']);
 $post = $posts->fetch()
 ?>
 <div>
@@ -25,8 +20,7 @@ $post = $posts->fetch()
 <div id="comments" class="text-left" style="margin-left: 50px">
     <h3>Commentaires</h3>
     <?php
-    $comment = new Comment();
-    $comments = $comment->getCommentsFromArticle($_GET['id']);
+    
     while ($comment = $comments->fetch()) {
     ?>
         <h4><?= htmlspecialchars($comment->pseudo); ?></h4>

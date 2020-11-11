@@ -3,10 +3,6 @@
     <div class="col-sm-8">
 <?php
 
-use App\src\DAO\Post;
-
-    $post = new Post();
-    $posts = $post->getPosts();
     while($post = $posts->fetch())
     {
         ?>

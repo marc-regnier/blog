@@ -8,4 +8,3 @@ $router = new App\config\Router();
 $router->run();
 
 
-require '../templates/default.php';
