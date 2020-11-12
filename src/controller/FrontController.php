@@ -2,20 +2,21 @@
 
 namespace App\src\controller;
 
-use App\src\DAO\Comment;
-use App\src\DAO\Post;
+use App\src\DAO\PostDAO;
+
+use App\src\DAO\CommentDAO;
 
 class FrontController
 {
 
-    private $post;
+    private $postDAO;
 
-    private $comment;
+    private $commentDAO;
 
     public function __construct()
     {
-        $this->post = new Post();
-        $this->comment = new Comment();
+        $this->postDAO = new PostDAO();
+        $this->commentDAO = new CommentDAO();
 
     }
 
@@ -23,7 +24,7 @@ class FrontController
     {
        
 
-        $posts = $this->post->getPosts();
+        $posts = $this->postDAO->getPosts();
 
         require '../templates/home.php';
     }
@@ -31,9 +32,9 @@ class FrontController
     public function single($id)
     {
 
-        $posts = $this->post->getPost($id);
+        $posts = $this->postDAO->getPost($id);
 
-        $comments = $this->comment->getCommentsFromArticle($id);
+        $comments = $this->commentDAO->getCommentsFromArticle($id);
 
         require '../templates/single.php';
     }

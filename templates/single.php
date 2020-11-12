@@ -1,19 +1,12 @@
-<?php
-
-$post = $posts->fetch()
-?>
 <div>
     <h1>Mon blog</h1>
     <p>En construction</p>
     <div>
-        <h2><?= htmlspecialchars($post->title); ?></h2>
-        <p><?= htmlspecialchars($post->content); ?></p>
-        <p>Créé le : <?= htmlspecialchars($post->createdAt); ?></p>
+    <h2><?= htmlspecialchars($posts->getTitle());?></h2>
+        <p><?= htmlspecialchars($posts->getContent());?></p>
+        <p>Créé le : <?= htmlspecialchars($posts->getCreatedAt());?></p>
     </div>
     <br>
-    <?php
-    $posts->closeCursor();
-    ?>
     <a href="index.php">Retour à l'accueil</a>
 </div>
 
@@ -21,13 +14,13 @@ $post = $posts->fetch()
     <h3>Commentaires</h3>
     <?php
     
-    while ($comment = $comments->fetch()) {
-    ?>
-        <h4><?= htmlspecialchars($comment->pseudo); ?></h4>
-        <p><?= htmlspecialchars($comment->content); ?></p>
-        <p>Posté le <?= htmlspecialchars($comment->createdAt); ?></p>
-    <?php
+    foreach ($comments as $comment)
+    {
+        ?>
+        <h4></h4>
+        <p><?= htmlspecialchars($comment->getContent());?></p>
+        <p>Posté le <?= htmlspecialchars($comment->getCreatedAt());?></p>
+        <?php
     }
-    $comments->closeCursor();
     ?>
 </div>

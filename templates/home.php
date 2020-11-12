@@ -3,18 +3,17 @@
     <div class="col-sm-8">
 <?php
 
-    while($post = $posts->fetch())
+    foreach($posts as $post)
     {
         ?>
         <div>
-            <h2><a href="index.php?p=post&id=<?= htmlspecialchars($post->id);?>"><?= htmlspecialchars($post->title);?></a></h2>
-            <p><?= htmlspecialchars($post->content);?></p>
-            <p>Créé le : <?= htmlspecialchars($post->createdAt);?></p>
+            <h2><a href="index.php?p=post&id=<?= htmlspecialchars($post->getId());?>"><?= htmlspecialchars($post->getTitle());?></a></h2>
+            <p><?= htmlspecialchars($post->getContent());?></p>
+            <p>Créé le : <?= htmlspecialchars($post->getCreatedAt());?></p>
         </div>
         <br>
         <?php
     }
-    $posts->closeCursor();
     ?>
 </div>
 

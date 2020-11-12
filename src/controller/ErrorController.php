@@ -6,8 +6,7 @@ namespace App\src\controller;
 class ErrorController
 {
 
-
-    public function errorNotFound()
+   public function errorNotFound()
     {
         require '../templates/error_404.php';
     }
