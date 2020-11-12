@@ -6,6 +6,8 @@ use App\src\DAO\PostDAO;
 
 use App\src\DAO\CommentDAO;
 
+use App\src\model\View;
+
 class FrontController
 {
 
@@ -16,7 +18,10 @@ class FrontController
     public function __construct()
     {
         $this->postDAO = new PostDAO();
+
         $this->commentDAO = new CommentDAO();
+
+        $this->view = new View();
 
     }
 
@@ -26,16 +31,26 @@ class FrontController
 
         $posts = $this->postDAO->getPosts();
 
-        require '../templates/home.php';
+        return $this->view->render('home', [
+
+            'posts' =>$posts
+        ]);
     }
 
     public function single($id)
     {
 
-        $posts = $this->postDAO->getPost($id);
+        $post = $this->postDAO->getPost($id);
 
         $comments = $this->commentDAO->getCommentsFromArticle($id);
 
-        require '../templates/single.php';
+        return $this->view->render('single', [
+
+            'post' => $post,
+
+            'comments' => $comments
+        ]);
     }
+
+    
 }

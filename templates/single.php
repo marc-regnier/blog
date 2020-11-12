@@ -1,10 +1,12 @@
+<?php $this->title = "Article"; ?>
+
 <div>
     <h1>Mon blog</h1>
     <p>En construction</p>
     <div>
-    <h2><?= htmlspecialchars($posts->getTitle());?></h2>
-        <p><?= htmlspecialchars($posts->getContent());?></p>
-        <p>Créé le : <?= htmlspecialchars($posts->getCreatedAt());?></p>
+    <h2><?= htmlspecialchars($post->getTitle());?></h2>
+        <p><?= htmlspecialchars($post->getContent());?></p>
+        <p>Créé le : <?= htmlspecialchars($post->getCreatedAt());?></p>
     </div>
     <br>
     <a href="index.php">Retour à l'accueil</a>
