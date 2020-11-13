@@ -12,29 +12,51 @@ class PostDAO extends DAO
         $post->setId($row['id']);
         $post->setTitle($row['title']);
         $post->setContent($row['content']);
-        $post->setCreatedAt($row['createdAt']);
+        $post->setCreatedAt($row['created_at']);
         return $post;
     }
 
     public function getPosts()
     {
-        $sql = 'SELECT id, title, content, createdAt FROM post ORDER BY id DESC';
+        $sql = 'SELECT * FROM posts ORDER BY id DESC';
+
         $result = $this->createQuery($sql);
+
         $posts = [];
+
         foreach ($result as $row){
+
             $id = $row['id'];
+
             $posts[$id] = $this->buildObject($row);
         }
+        
         $result->closeCursor();
+
         return $posts;
     }
 
     public function getPost($id)
     {
-        $sql = 'SELECT id, title, content, createdAt FROM post WHERE id = ?';
+        $sql = 'SELECT * FROM posts WHERE id = ?';
+
         $result = $this->createQuery($sql, [$id]);
+
         $post = $result->fetch();
+
         $result->closeCursor();
+
         return $this->buildObject($post);
+    }
+
+
+    public function addPost($post)
+    {
+        extract($post);
+
+        $sql = 'INSERT INTO posts (title, content, created_at) VALUES (?, ?, NOW())';
+
+        $this->createQuery($sql,[$title, $content]);
+
     }
 }

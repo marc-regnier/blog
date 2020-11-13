@@ -12,15 +12,16 @@ class CommentDAO extends DAO
     {
         $comment = new Comment();
         $comment->setId($row['id']);
+        $comment->setPseudo($row['pseudo']);
         $comment->setContent($row['content']);
-        $comment->setCreatedAt($row['createdAt']);
+        $comment->setCreatedAt($row['created_at']);
         return $comment;
     }
 
 
     public function getCommentsFromArticle($id)
     {
-        $sql = 'SELECT comment.id, comment.content, comment.createdAt, users.username as pseudo FROM comment LEFT JOIN users ON comment.user_id = users.id WHERE post_id = ? ORDER BY createdAt DESC';
+        $sql = "SELECT * FROM comments WHERE posts_id = ? ORDER BY created_at DESC";
         $result = $this->createQuery($sql, [$id]);
         $comments = [];
         foreach ($result as $row) {

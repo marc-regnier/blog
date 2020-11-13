@@ -3,6 +3,7 @@
 
 <div class="row">
     <div class="col-sm-8">
+    <a href="../public/index.php?p=addPost">Nouvel article</a>
 <?php
 
     foreach($posts as $post)

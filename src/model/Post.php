@@ -20,9 +20,9 @@ class Post
     private $content;
 
     /**
-     * @var string
+     * @var int
      */
-    private $author;
+    private $userId;
 
     /**
      * @var \DateTime
@@ -75,6 +75,22 @@ class Post
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
     }
 
     /**

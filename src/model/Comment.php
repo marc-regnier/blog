@@ -8,11 +8,12 @@ class Comment
      * @var int
      */
     private $id;
+    
 
     /**
-     * @var int
+     * @var string
      */
-    private $userId;
+    private $pseudo;
 
     /**
      * @var string
@@ -22,7 +23,7 @@ class Comment
     /**
      * @var \DateTime
      */
-    private $createdAt;
+    private $created_at;
 
     /**
      * @return int
@@ -35,26 +36,26 @@ class Comment
     /**
      * @param int $id
      */
-    public function setId($userId)
-    {
-        $this->userId = $userId;
-    }
-
-
-    /**
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setUserId($id)
+    public function setId($id)
     {
         $this->id = $id;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    /**
+     * @param string $pseudo
+     */
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
     }
 
 
@@ -79,14 +80,14 @@ class Comment
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     /**
      * @param \DateTime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($created_at)
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = $created_at;
     }
 }
