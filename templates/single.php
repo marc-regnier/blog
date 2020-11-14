@@ -14,6 +14,7 @@
     </div>
     <br>
     <a href="index.php">Retour à l'accueil</a>
+    <a href="../public/index.php?p=deletePost&id=<?= $post->getId(); ?>">Supprimer</a>
 </div>
 
 <div id="comments" class="text-left" style="margin-left: 50px">

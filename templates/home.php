@@ -1,9 +1,12 @@
 
-<?php $this->title = "Accueil"; ?>
-
 <?= $this->session->show('add_post'); ?>
 
-<?= $this->session->show('edit_article'); ?>
+<?= $this->session->show('edit_post'); ?>
+
+<?= $this->session->show('delete_post'); ?>
+
+<?php $this->title = "Accueil"; ?>
+
 
 <div class="row">
     <div class="col-sm-8">

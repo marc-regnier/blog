@@ -56,7 +56,7 @@ class BackController extends Controller
 
         return $this->view->render('edit_post', [
 
-            'article' => $article,
+            'post' => $post,
 
             'errors' => $errors
 
@@ -68,8 +68,20 @@ class BackController extends Controller
         $post->set('title', $article->getTitle());
         $post->set('content', $article->getContent());
 
+
         return $this->view->render('edit_post', [
-            'article' => $article
+            'post' => $post
         ]);
+
+        
+    }
+
+    public function deletePost($id)
+    {
+        $this->postDAO->deletePost($id);
+
+        $this->session->set('delete_post', 'L\' article a bien été supprimé');
+        
+        header('Location: ../public/index.php');
     }
 }

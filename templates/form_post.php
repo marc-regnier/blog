@@ -1,20 +1,13 @@
 <?php
-$p = isset($article) && $article->getId() ? 'editPost&id='.$article->getId() : 'addPost';
-
-$submit = $p === 'addPost' ? 'Envoyer' : 'Mettre à jour';
-
-$title = isset($article) && $article->getTitle() ? htmlspecialchars($article->getTitle()) : '';
-
-$content = isset($article) && $article->getContent() ? htmlspecialchars($article->getContent()) : '';
-
+$route = isset($post) && $post->get('id') ? 'editPost&id='.$post->get('id') : 'addPost';
+$submit = $route === 'addPost' ? 'Envoyer' : 'Mettre à jour';
 ?>
-
-<form method="post" action="../public/index.php?p=addPost">
+<form method="post" action="../public/index.php?p=<?= $route; ?>">
     <label for="title">Titre</label><br>
-    <input type="text" id="title" name="title" value="<?= $title; ?>"><br>
+    <input type="text" id="title" name="title" value="<?= isset($post) ? htmlspecialchars($post->get('title')): ''; ?>"><br>
     <?= isset($errors['title']) ? $errors['title'] : ''; ?>
     <label for="content">Contenu</label><br>
-    <textarea id="content" name="content"><?= $content; ?></textarea><br>
+    <textarea id="content" name="content"><?= isset($post) ? htmlspecialchars($post->get('content')): ''; ?></textarea><br>
     <?= isset($errors['content']) ? $errors['content'] : ''; ?>
-    <input type="submit" value="Envoyer" id="submit" name="submit">
+    <input type="submit" value="<?= $submit; ?>" id="submit" name="submit">
 </form>

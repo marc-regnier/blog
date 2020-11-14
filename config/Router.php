@@ -58,6 +58,10 @@ class Router
                 {
                     $this->backController->editPost($this->request->getPost(), $this->request->getGet()->get('id'));
                 }
+                elseif ($p === 'deletePost')
+                {
+                    $this->backController->deletePost($this->request->getGet()->get('id'));
+                }
                 else
                 {
                     $this->errorController->errorNotFound();

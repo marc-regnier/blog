@@ -66,9 +66,23 @@ class PostDAO extends DAO
         $sql = 'UPDATE posts SET title=:title, content=:content WHERE id=:id';
 
         $this->createQuery($sql, [
+
             'title' => $post->get('title'),
+
             'content' => $post->get('content'),
+
             'id' => $id
         ]);
+    }
+
+    public function deletePost($id)
+    {
+        $sql = 'DELETE FROM comments WHERE id = ?';
+
+        $this->createQuery($sql, [$id]);
+
+        $sql = 'DELETE FROM posts WHERE id = ?';
+
+        $this->createQuery($sql, [$id]);
     }
 }
