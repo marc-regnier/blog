@@ -9,6 +9,7 @@ use App\src\model\View;
 use App\src\DAO\PostDAO;
 
 use App\src\DAO\CommentDAO;
+use App\src\constraint\Validation;
 
 
 abstract class Controller
@@ -28,6 +29,8 @@ abstract class Controller
 
     protected $session;
 
+    protected $validation;
+
 
     public function __construct()
     {
@@ -38,6 +41,8 @@ abstract class Controller
         $this->view = new View();
 
         $this->request = new Request();
+
+        $this->validation = new Validation();
 
         $this->get = $this->request->getGet();
 

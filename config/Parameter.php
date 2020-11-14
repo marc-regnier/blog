@@ -24,4 +24,9 @@ class Parameter
         $this->parameter[$name] = $value;
     }
 
+    public function all()
+    {
+        return $this->parameter;
+    }
+
 }

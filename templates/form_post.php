@@ -12,7 +12,9 @@ $content = isset($article) && $article->getContent() ? htmlspecialchars($article
 <form method="post" action="../public/index.php?p=addPost">
     <label for="title">Titre</label><br>
     <input type="text" id="title" name="title" value="<?= $title; ?>"><br>
+    <?= isset($errors['title']) ? $errors['title'] : ''; ?>
     <label for="content">Contenu</label><br>
-    <textarea id="content" name="content" ><?= $content; ?></textarea><br>
+    <textarea id="content" name="content"><?= $content; ?></textarea><br>
+    <?= isset($errors['content']) ? $errors['content'] : ''; ?>
     <input type="submit" value="Envoyer" id="submit" name="submit">
 </form>
