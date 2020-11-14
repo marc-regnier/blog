@@ -1,6 +1,10 @@
 
 <?php $this->title = "Accueil"; ?>
 
+<?= $this->session->show('add_post'); ?>
+
+<?= $this->session->show('edit_article'); ?>
+
 <div class="row">
     <div class="col-sm-8">
     <a href="../public/index.php?p=addPost">Nouvel article</a>

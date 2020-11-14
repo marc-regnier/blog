@@ -4,6 +4,8 @@ namespace App\src\DAO;
 
 use App\src\model\Post;
 
+use App\config\Parameter;
+
 class PostDAO extends DAO
 {
     private function buildObject($row)
@@ -50,13 +52,23 @@ class PostDAO extends DAO
     }
 
 
-    public function addPost($post)
+    public function addPost(Parameter $post)
     {
-        extract($post);
 
         $sql = 'INSERT INTO posts (title, content, created_at) VALUES (?, ?, NOW())';
 
-        $this->createQuery($sql,[$title, $content]);
+        $this->createQuery($sql,[$post->get('title'), $post->get('content')]);
 
+    }
+
+    public function editPost(Parameter $post, $id)
+    {
+        $sql = 'UPDATE posts SET title=:title, content=:content WHERE id=:id';
+
+        $this->createQuery($sql, [
+            'title' => $post->get('title'),
+            'content' => $post->get('content'),
+            'id' => $id
+        ]);
     }
 }

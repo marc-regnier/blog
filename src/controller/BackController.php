@@ -2,25 +2,22 @@
 
 namespace App\src\controller;
 
-use App\src\model\View;
-use App\src\DAO\PostDAO;
+use App\config\Parameter;
 
-class BackController
+
+
+class BackController extends Controller
 {
-    private $view;
+    
 
-    public function __construct()
+    public function addPost(Parameter $post)
     {
-        $this->view = new View();
-    }
+        if($post->get('submit'))
+        {
 
-    public function addPost($post)
-    {
-        if(isset($post['submit'])) {
+            $this->postDAO->addPost($post);
 
-            $postDAO = new PostDAO();
-
-            $postDAO->addPost($post);
+            $this->session->set('add_post', 'Le nouvel article a bien été ajouté');
 
             header('Location: ../public/index.php');
         }
@@ -29,5 +26,26 @@ class BackController
             'post' => $post
         ]);
     }
+
+    public function editPost(Parameter $post, $id)
+    {
+        $article = $this->postDAO->getPost($id);
+
+        if($post->get('submit'))
+        {
+            $this->postDAO->editPost($post, $id);
+
+            $this->session->set('edit_post', 'L\' article a bien été modifié');
+
+            header('Location: ../public/index.php');
+        }
+
+        return $this->view->render('edit_post',[
+
+            'article' => $article
+
+        ]);
+    }
+
     
 }

@@ -19,6 +19,8 @@ class Router
 
     private $errorController;
 
+    private $request;
+
 
     public function __construct()
     {
@@ -28,25 +30,33 @@ class Router
 
         $this->errorController = new ErrorController();
 
+        $this->request = new Request();
+
     }
 
     public function run()
     {
 
+        $p = $this->request->getGet()->get('p');
+
         try
         {
-            if(isset($_GET['p']))
+            if(isset($p))
             {
-                if($_GET['p'] === 'post')
+                if($p === 'post')
                 {
-                   $this->frontController->single($_GET['id']);
+                   $this->frontController->single($this->request->getGet()->get('id'));
 
                 }
-                else if($_GET['p'] === 'addPost')
+                else if($p === 'addPost')
                 {
 
-                    $this->backController->addPost($_POST);
+                    $this->backController->addPost($this->request->getPost());
 
+                }
+                elseif ($p === 'editPost')
+                {
+                    $this->backController->editPost($this->request->getPost(), $this->request->getGet()->get('id'));
                 }
                 else
                 {
