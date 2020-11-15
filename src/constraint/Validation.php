@@ -12,5 +12,11 @@ class Validation
             $errors = $postValidation->check($data);
             return $errors;
         }
+        elseif ($name === 'comment')
+        {
+            $commentValidation = new CommentValidation();
+            $errors = $commentValidation->check($data);
+            return $errors;
+        }
     }
 }

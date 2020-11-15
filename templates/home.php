@@ -5,6 +5,8 @@
 
 <?= $this->session->show('delete_post'); ?>
 
+<?= $this->session->show('add_comment'); ?>
+
 <?php $this->title = "Accueil"; ?>
 
 

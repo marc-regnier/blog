@@ -18,6 +18,9 @@
 </div>
 
 <div id="comments" class="text-left" style="margin-left: 50px">
+
+    <h3>Ajouter un commentaire</h3>
+    <?php include('form_comment.php'); ?>
     <h3>Commentaires</h3>
     <?php
 
