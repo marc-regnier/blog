@@ -7,6 +7,10 @@
 
 <?= $this->session->show('add_comment'); ?>
 
+<?= $this->session->show('flag_comment'); ?>
+
+<?= $this->session->show('delete_comment'); ?>
+
 <?php $this->title = "Accueil"; ?>
 
 

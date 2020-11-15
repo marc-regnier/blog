@@ -27,8 +27,25 @@
     foreach ($comments as $comment) {
     ?>
         <h4><?= htmlspecialchars($comment->getPseudo()); ?></h4>
+
         <p><?= htmlspecialchars($comment->getContent()); ?></p>
+
         <p>Posté le <?= htmlspecialchars($comment->getCreatedAt()); ?></p>
+
+        <?php
+        if($comment->isFlag()) {
+            ?>
+            <p>Ce commentaire a déjà été signalé</p>
+            <?php
+        } else {
+            ?>
+
+        <p><a href="../public/index.php?p=flagComment&id=<?= $comment->getId(); ?>">Signaler le commentaire</a></p>
+        <?php
+        }
+        ?>
+        <p><a href="../public/index.php?p=deleteComment&id=<?= $comment->getId(); ?>">Supprimer le commentaire</a></p>
+        <br>
     <?php
     }
     ?>
