@@ -88,7 +88,39 @@ class BackController extends Controller
     public function deleteComment($id)
     {
         $this->commentDAO->deleteComment($id);
+
         $this->session->set('delete_comment', 'Le commentaire a bien été supprimé');
+
         header('Location: ../public/index.php');
+    }
+
+    public function profile()
+    {
+        return $this->view->render('profile');
+    }
+
+    public function updatePassword(Parameter $post)
+    {
+        if($post->get('submit')) {
+
+            $this->userDAO->updatePassword($post, $this->session->get('pseudo'));
+
+            $this->session->set('update_password', 'Le mot de passe a été mis à jour');
+
+            header('Location: ../public/index.php?p=profile');
+        }
+        return $this->view->render('update_password');
+    }
+
+    public function logout()
+    {
+        $this->session->stop();
+
+        $this->session->start();
+
+        $this->session->set('logout', 'À bientôt');
+
+        header('Location: ../public/index.php');
+
     }
 }

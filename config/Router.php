@@ -74,10 +74,33 @@ class Router
                 {
                     $this->backController->deleteComment($this->request->getGet()->get('id'));
                 }
-                elseif($p === 'register'){
+                else if($p === 'register')
+                {
+
                     $this->frontController->register($this->request->getPost());
                 }
-                else{
+                else if($p === 'login')
+                {
+
+                    $this->frontController->login($this->request->getPost());
+                }
+                else if($p === 'profile')
+                {
+
+                    $this->backController->profile();
+
+                }
+                else if($p === 'updatePassword')
+                {
+
+                    $this->backController->updatePassword($this->request->getPost());
+
+                }else if($p === 'logout')
+                {
+                    $this->backController->logout();
+                }
+                else
+                {
                     $this->errorController->errorNotFound();
                 }
             }

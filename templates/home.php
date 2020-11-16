@@ -14,6 +14,10 @@
 
 <?= $this->session->show('register'); ?>
 
+<?= $this->session->show('login'); ?>
+
+<?= $this->session->show('logout'); ?>
+
 <div class="row">
     <div class="col-sm-8">
         <?php

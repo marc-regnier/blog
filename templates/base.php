@@ -20,15 +20,30 @@
       <li class="nav-item active">
         <a class="nav-link" href="../public/index.php">Home</a>
       </li>
-      <li class="nav-item active">
+      <?php
+if ($this->session->get('pseudo')) {
+    ?>
+    <li class="nav-item active">
+        <a class="nav-link" href="../public/index.php?p=logout">Déconnexion</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="../public/index.php?p=profile">Profil</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="../public/index.php?p=addPost">Ajouter un article</a>
+    </li>
+<?php
+} else {
+    ?>
+    <li class="nav-item active">
         <a class="nav-link" href="../public/index.php?p=register">Inscription</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="../public/index.php?p=login">Login</a>
+        <a class="nav-link" href="../public/index.php?p=login">Connexion</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="../public/index.php?p=addPost">Ajouter un article</a>
-      </li>
+<?php
+}
+?>
     </ul>
   </div>
 </nav>
