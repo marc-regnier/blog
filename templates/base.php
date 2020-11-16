@@ -10,12 +10,27 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand"></a>
-        </div>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<a class="navbar-brand" href="../public/index.php">Blog</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="../public/index.php">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="../public/index.php?p=register">Inscription</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="../public/index.php?p=login">Login</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="../public/index.php?p=addPost">Ajouter un article</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 
 <div class="container">

@@ -1,3 +1,4 @@
+<?php $this->title = "Accueil"; ?>
 
 <?= $this->session->show('add_post'); ?>
 
@@ -11,39 +12,36 @@
 
 <?= $this->session->show('delete_comment'); ?>
 
-<?php $this->title = "Accueil"; ?>
-
+<?= $this->session->show('register'); ?>
 
 <div class="row">
     <div class="col-sm-8">
-    <a href="../public/index.php?p=addPost">Nouvel article</a>
-<?php
-
-    foreach($posts as $post)
-    {
-        ?>
-        <div>
-            <h2><a href="index.php?p=post&id=<?= htmlspecialchars($post->getId());?>"><?= htmlspecialchars($post->getTitle());?></a></h2>
-            <p><?= htmlspecialchars($post->getContent());?></p>
-            <p>Créé le : <?= htmlspecialchars($post->getCreatedAt());?></p>
-        </div>
-        <br>
         <?php
-    }
-    ?>
+
+        foreach ($posts as $post) {
+        ?>
+            <div>
+                <h2><a href="index.php?p=post&id=<?= htmlspecialchars($post->getId()); ?>"><?= htmlspecialchars($post->getTitle()); ?></a></h2>
+                <p><?= htmlspecialchars($post->getContent()); ?></p>
+                <p>Créé le : <?= htmlspecialchars($post->getCreatedAt()); ?></p>
+            </div>
+            <br>
+        <?php
+        }
+        ?>
+    </div>
+
+
 </div>
 
+<div class="col-sm-4">
 
-    </div>
-       
-    <div class="col-sm-4">
+    <ul>
 
-        <ul>
+        <li><a href=""></a></li>
 
-                <li><a href=""></a></li>
+    </ul>
 
-        </ul>
-
-    </div>
+</div>
 
 </div>

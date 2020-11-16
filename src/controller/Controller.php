@@ -8,7 +8,10 @@ use App\src\model\View;
 
 use App\src\DAO\PostDAO;
 
+use App\src\DAO\UserDAO;
+
 use App\src\DAO\CommentDAO;
+
 use App\src\constraint\Validation;
 
 
@@ -18,6 +21,8 @@ abstract class Controller
     protected $postDAO;
 
     protected $commentDAO;
+
+    protected $userDAO;
 
     protected $view;
 
@@ -37,6 +42,8 @@ abstract class Controller
         $this->postDAO = new PostDAO();
 
         $this->commentDAO = new CommentDAO();
+
+        $this->userDAO = new UserDAO();
 
         $this->view = new View();
 
