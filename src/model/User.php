@@ -22,6 +22,11 @@ class User
     /**
      * @var string
      */
+    private $roles;
+
+    /**
+     * @var string
+     */
     private $password;
 
     /**
@@ -75,6 +80,22 @@ class User
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param string $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     /**

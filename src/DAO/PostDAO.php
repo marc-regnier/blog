@@ -63,7 +63,7 @@ class PostDAO extends DAO
 
     public function editPost(Parameter $post, $id, $userId)
     {
-        $sql = 'UPDATE posts SET title=:title, content=:content, users_id=:users_id WHERE id=:id';
+        $sql = 'UPDATE posts SET title = :title, content = :content, users_id = :user_id WHERE id=:id';
 
         $this->createQuery($sql, [
 

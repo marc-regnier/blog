@@ -2,10 +2,37 @@
 
 namespace App\src\DAO;
 
+use App\src\model\User;
+
 use App\config\Parameter;
 
 class UserDAO extends DAO
 {
+
+    private function buildObject($row)
+    {
+        $user = new User();
+        $user->setId($row['id']);
+        $user->setPseudo($row['pseudo']);
+        $user->setCreatedAt($row['createdAt']);
+        $user->setRoles($row['roles']);
+        return $user;
+    }
+
+    public function getUsers()
+    {
+        $sql = 'SELECT id, pseudo, roles, createdAt FROM users ORDER BY id DESC';
+        $result = $this->createQuery($sql);
+        $users = [];
+        foreach ($result as $row){
+            $userId = $row['id'];
+            $users[$userId] = $this->buildObject($row);
+        }
+        $result->closeCursor();
+        return $users;
+    }
+    
+
     public function register(Parameter $post)
     {
         $this->checkUser($post);
@@ -58,6 +85,12 @@ class UserDAO extends DAO
     {
         $sql = 'DELETE FROM users WHERE pseudo = ?';
         $this->createQuery($sql, [$pseudo]);
+    }
+
+    public function deleteUser($id)
+    {
+        $sql = 'DELETE FROM users WHERE id = ?';
+        $this->createQuery($sql, [$id]);
     }
 
     

@@ -11,6 +11,10 @@
 
 <?= $this->session->show('unflag_comment'); ?>
 
+<?= $this->session->show('delete_comment'); ?>
+
+<?= $this->session->show('delete_user'); ?>
+
 <h2>Articles</h2>
 
 <table>
@@ -62,8 +66,8 @@
             <td><?= htmlspecialchars($comment->getPseudo());?></td>
             <td><?= substr(htmlspecialchars($comment->getContent()), 0, 150);?></td>
             <td>Créé le : <?= htmlspecialchars($comment->getCreatedAt());?></td>
-            <td><a href="../public/index.php?route=unflagComment&id=<?= $comment->getId(); ?>">Désignaler le commentaire</a>
-                <a href="../public/index.php?route=deleteComment&id=<?= $comment->getId(); ?>">Supprimer le commentaire</a></td>
+            <td><a href="../public/index.php?p=unflagComment&id=<?= $comment->getId(); ?>">Désignaler le commentaire</a>
+                <a href="../public/index.php?p=deleteComment&id=<?= $comment->getId(); ?>">Supprimer le commentaire</a></td>
         </tr>
         <?php
     }
@@ -71,3 +75,37 @@
 </table>
 
 <h2>Utilisateurs</h2>
+
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Pseudo</td>
+        <td>Date</td>
+        <td>Rôle</td>
+        <td>Actions</td>
+    </tr>
+    <?php
+    foreach ($users as $user)
+    {
+        ?>
+        <tr>
+            <td><?= htmlspecialchars($user->getId());?></td>
+            <td><?= htmlspecialchars($user->getPseudo());?></td>
+            <td>Créé le : <?= htmlspecialchars($user->getCreatedAt());?></td>
+            <td><?= htmlspecialchars($user->getRoles());?></td>
+            <td><?php
+                if($user->getRoles() != 'admin') {
+                ?>
+                <a href="../public/index.php?p=deleteUser&id=<?= $user->getId(); ?>">Supprimer</a>
+                <?php }
+                else {
+                    ?>
+                Suppression impossible
+                <?php
+                }
+                ?></td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>

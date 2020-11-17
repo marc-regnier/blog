@@ -71,7 +71,7 @@ class Router
                     $this->frontController->flagComment($this->request->getGet()->get('id'));
                 }
                 else if($p === 'unflagComment'){
-                    $this->backController->unflagComment($this->request->getGet()->get('commentId'));
+                    $this->backController->unflagComment($this->request->getGet()->get('id'));
                 }
                 
                 else if($p === 'deleteComment')
@@ -107,6 +107,10 @@ class Router
                 {
 
                     $this->backController->deleteAccount();
+                }
+                else if($p === 'deleteUser')
+                {
+                    $this->backController->deleteUser($this->request->getGet()->get('id'));
                 }
                 else if($p === 'administration')
                 {
