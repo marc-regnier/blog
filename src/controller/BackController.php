@@ -90,6 +90,13 @@ class BackController extends Controller
         header('Location: ../public/index.php?p=administration');
     }
 
+    public function unflagComment($commentId)
+    {
+        $this->commentDAO->unflagComment($commentId);
+        $this->session->set('unflag_comment', 'Le commentaire a bien été désignalé');
+        header('Location: ../public/index.php?p=administration');
+    }
+
     public function deleteComment($id)
     {
         $this->commentDAO->deleteComment($id);
@@ -146,9 +153,13 @@ class BackController extends Controller
     {
         $posts = $this->postDAO->getPosts();
 
+        $comments = $this->commentDAO->getFlagComments();
+
         return $this->view->render('administration', [
 
-            'posts' => $posts
+            'posts' => $posts,
+
+            'comments' => $comments
         ]);
     }
 

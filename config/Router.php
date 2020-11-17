@@ -54,22 +54,26 @@ class Router
                     $this->backController->addPost($this->request->getPost());
 
                 }
-                elseif ($p === 'editPost')
+                else if ($p === 'editPost')
                 {
                     $this->backController->editPost($this->request->getPost(), $this->request->getGet()->get('id'));
                 }
-                elseif ($p === 'deletePost')
+                else if ($p === 'deletePost')
                 {
                     $this->backController->deletePost($this->request->getGet()->get('id'));
                 }
-                elseif($p === 'addComment')
+                else if($p === 'addComment')
                 {
                     $this->frontController->addComment($this->request->getPost(), $this->request->getGet()->get('id'));
                 }
-                elseif($p === 'flagComment')
+                else if($p === 'flagComment')
                 {
                     $this->frontController->flagComment($this->request->getGet()->get('id'));
                 }
+                else if($p === 'unflagComment'){
+                    $this->backController->unflagComment($this->request->getGet()->get('commentId'));
+                }
+                
                 else if($p === 'deleteComment')
                 {
                     $this->backController->deleteComment($this->request->getGet()->get('id'));
@@ -104,7 +108,7 @@ class Router
 
                     $this->backController->deleteAccount();
                 }
-                elseif($p === 'administration')
+                else if($p === 'administration')
                 {
 
                     $this->backController->administration();
