@@ -14,25 +14,26 @@ class PostDAO extends DAO
         $post->setId($row['id']);
         $post->setTitle($row['title']);
         $post->setContent($row['content']);
+        $post->setUserId($row['pseudo']);
         $post->setCreatedAt($row['created_at']);
         return $post;
     }
 
     public function getPosts()
     {
-        $sql = 'SELECT * FROM posts ORDER BY id DESC';
+        $sql = 'SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at FROM posts INNER JOIN users ON posts.users_id = users.id ORDER BY posts.id DESC';
 
         $result = $this->createQuery($sql);
 
         $posts = [];
 
-        foreach ($result as $row){
+        foreach ($result as $row) {
 
             $id = $row['id'];
 
             $posts[$id] = $this->buildObject($row);
         }
-        
+
         $result->closeCursor();
 
         return $posts;
@@ -40,7 +41,7 @@ class PostDAO extends DAO
 
     public function getPost($id)
     {
-        $sql = 'SELECT * FROM posts WHERE id = ?';
+        $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at FROM posts INNER JOIN users ON posts.users_id = users.id WHERE posts.id = ?";
 
         $result = $this->createQuery($sql, [$id]);
 
@@ -52,24 +53,25 @@ class PostDAO extends DAO
     }
 
 
-    public function addPost(Parameter $post)
+    public function addPost(Parameter $post, $userId)
     {
 
-        $sql = 'INSERT INTO posts (title, content, created_at) VALUES (?, ?, NOW())';
+        $sql = 'INSERT INTO posts (title, users_id, content, created_at) VALUES (?, ?, ?, NOW())';
 
-        $this->createQuery($sql,[$post->get('title'), $post->get('content')]);
-
+        $this->createQuery($sql, [$post->get('title'), $userId, $post->get('content')]);
     }
 
-    public function editPost(Parameter $post, $id)
+    public function editPost(Parameter $post, $id, $userId)
     {
-        $sql = 'UPDATE posts SET title=:title, content=:content WHERE id=:id';
+        $sql = 'UPDATE posts SET title=:title, content=:content, users_id=:users_id WHERE id=:id';
 
         $this->createQuery($sql, [
 
             'title' => $post->get('title'),
 
             'content' => $post->get('content'),
+
+            'user_id' => $userId,
 
             'id' => $id
         ]);

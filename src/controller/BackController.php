@@ -18,11 +18,11 @@ class BackController extends Controller
 
             if (!$errors) {
 
-                $this->postDAO->addPost($post);
+                $this->postDAO->addPost($post, $this->session->get('id'));;
 
                 $this->session->set('add_post', 'Le nouvel article a bien été ajouté');
 
-                header('Location: ../public/index.php');
+                header('Location: ../public/index.php?p=administration');
             }
 
             return $this->view->render('add_Post', [
@@ -40,17 +40,18 @@ class BackController extends Controller
     {
         $article = $this->postDAO->getPost($id);
 
-        if ($post->get('submit')) 
+        if ($post->get('submit'))
         {
             $errors = $this->validation->validate($post, 'post');
 
-            if (!$errors) {
+            if (!$errors) 
+            {
 
-                $this->postDAO->editPost($post, $id);
+                $this->postDAO->editPost($post, $id, $this->session->get('id'));
 
                 $this->session->set('edit_post', 'L\' article a bien été modifié');
 
-                header('Location: ../public/index.php');
+                header('Location: ../public/index.php?p=administration');
             }
         
 
@@ -65,8 +66,12 @@ class BackController extends Controller
         }
 
         $post->set('id', $article->getId());
+
         $post->set('title', $article->getTitle());
+
         $post->set('content', $article->getContent());
+
+        $post->set('author', $article->getUserId());
 
 
         return $this->view->render('edit_post', [
@@ -82,7 +87,7 @@ class BackController extends Controller
 
         $this->session->set('delete_post', 'L\' article a bien été supprimé');
         
-        header('Location: ../public/index.php');
+        header('Location: ../public/index.php?p=administration');
     }
 
     public function deleteComment($id)
@@ -121,7 +126,7 @@ class BackController extends Controller
     public function deleteAccount()
     {
         $this->userDAO->deleteAccount($this->session->get('pseudo'));
-        
+
         $this->logoutOrDelete('delete_account');
     }
 
@@ -139,7 +144,12 @@ class BackController extends Controller
 
     public function administration()
     {
-        return $this->view->render('administration');
+        $posts = $this->postDAO->getPosts();
+
+        return $this->view->render('administration', [
+
+            'posts' => $posts
+        ]);
     }
 
     
