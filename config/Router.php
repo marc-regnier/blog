@@ -99,8 +99,15 @@ class Router
                 {
                     $this->backController->logout();
                 }
-                else if($p === 'deleteAccount'){
+                else if($p === 'deleteAccount')
+                {
+
                     $this->backController->deleteAccount();
+                }
+                elseif($p === 'administration')
+                {
+
+                    $this->backController->administration();
                 }
                 else
                 {

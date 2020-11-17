@@ -31,7 +31,7 @@ class UserDAO extends DAO
 
     public function login(Parameter $post)
     {
-        $sql = 'SELECT id, password FROM users WHERE pseudo = ?';
+        $sql = 'SELECT id, password, roles FROM users WHERE pseudo = ?';
 
         $data = $this->createQuery($sql, [$post->get('pseudo')]);
 

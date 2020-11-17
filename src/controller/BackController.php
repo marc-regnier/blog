@@ -121,6 +121,7 @@ class BackController extends Controller
     public function deleteAccount()
     {
         $this->userDAO->deleteAccount($this->session->get('pseudo'));
+        
         $this->logoutOrDelete('delete_account');
     }
 
@@ -134,6 +135,11 @@ class BackController extends Controller
             $this->session->set($param, 'Votre compte a bien été supprimé');
         }
         header('Location: ../public/index.php');
+    }
+
+    public function administration()
+    {
+        return $this->view->render('administration');
     }
 
     

@@ -29,9 +29,14 @@ if ($this->session->get('pseudo')) {
     <li class="nav-item active">
         <a class="nav-link" href="../public/index.php?p=profile">Profil</a>
     </li>
+    <?php if($this->session->get('roles') === 'admin') { ?>
+    <li class="nav-item active">
+        <a class="nav-link" href="../public/index.php?p=administration">Administration</a>
+    </li>
     <li class="nav-item active">
         <a class="nav-link" href="../public/index.php?p=addPost">Ajouter un article</a>
     </li>
+    <?php } ?>
 <?php
 } else {
     ?>

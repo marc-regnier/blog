@@ -117,6 +117,8 @@ class FrontController extends Controller
 
                 $this->session->set('id', $result['result']['id']);
 
+                $this->session->set('roles', $result['result']['roles']);
+
                 $this->session->set('pseudo', $post->get('pseudo'));
 
                 header('Location: ../public/index.php');
