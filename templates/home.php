@@ -18,6 +18,8 @@
 
 <?= $this->session->show('logout'); ?>
 
+<?= $this->session->show('delete_account'); ?>
+
 <div class="row">
     <div class="col-sm-8">
         <?php

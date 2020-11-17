@@ -99,6 +99,9 @@ class Router
                 {
                     $this->backController->logout();
                 }
+                else if($p === 'deleteAccount'){
+                    $this->backController->deleteAccount();
+                }
                 else
                 {
                     $this->errorController->errorNotFound();
