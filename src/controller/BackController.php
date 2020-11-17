@@ -9,146 +9,189 @@ use App\config\Parameter;
 class BackController extends Controller
 {
 
+    private function checkLoggedIn()
+    {
+        if (!$this->session->get('pseudo')) {
+            $this->session->set('need_login', 'Vous devez vous connecter pour accéder à cette page');
+            header('Location: ../public/index.php?p=login');
+        } else {
+            return true;
+        }
+    }
+
+    private function checkAdmin()
+    {
+        $this->checkLoggedIn();
+        if (!($this->session->get('roles') === 'admin')) {
+            $this->session->set('not_admin', 'Vous n\'avez pas le droit d\'accéder à cette page');
+            header('Location: ../public/index.php?p=profile');
+        } else {
+            return true;
+        }
+    }
+
 
     public function addPost(Parameter $post)
     {
-        if ($post->get('submit')) {
 
-            $errors = $this->validation->validate($post, 'post');
+        if ($this->checkAdmin()) {
+            if ($post->get('submit')) {
 
-            if (!$errors) {
+                $errors = $this->validation->validate($post, 'post');
 
-                $this->postDAO->addPost($post, $this->session->get('id'));;
+                if (!$errors) {
 
-                $this->session->set('add_post', 'Le nouvel article a bien été ajouté');
+                    $this->postDAO->addPost($post, $this->session->get('id'));;
 
-                header('Location: ../public/index.php?p=administration');
+                    $this->session->set('add_post', 'Le nouvel article a bien été ajouté');
+
+                    header('Location: ../public/index.php?p=administration');
+                }
+
+                return $this->view->render('add_Post', [
+
+                    'post' => $post,
+
+                    'errors' => $errors
+                ]);
             }
 
-            return $this->view->render('add_Post', [
-
-                'post' => $post,
-
-                'errors' => $errors
-            ]);
+            return $this->view->render('add_post');
         }
-
-        return $this->view->render('add_post');
     }
 
     public function editPost(Parameter $post, $id)
     {
-        $article = $this->postDAO->getPost($id);
+        if ($this->checkAdmin()) {
 
-        if ($post->get('submit'))
-        {
-            $errors = $this->validation->validate($post, 'post');
+            $article = $this->postDAO->getPost($id);
 
-            if (!$errors) 
-            {
+            if ($post->get('submit')) {
+                $errors = $this->validation->validate($post, 'post');
 
-                $this->postDAO->editPost($post, $id, $this->session->get('id'));
+                if (!$errors) {
 
-                $this->session->set('edit_post', 'L\' article a bien été modifié');
+                    $this->postDAO->editPost($post, $id, $this->session->get('id'));
 
-                header('Location: ../public/index.php?p=administration');
+                    $this->session->set('edit_post', 'L\' article a bien été modifié');
+
+                    header('Location: ../public/index.php?p=administration');
+                }
+
+
+                return $this->view->render('edit_post', [
+
+                    'post' => $post,
+
+                    'errors' => $errors
+
+                ]);
             }
-        
 
-        return $this->view->render('edit_post', [
+            $post->set('id', $article->getId());
 
-            'post' => $post,
+            $post->set('title', $article->getTitle());
 
-            'errors' => $errors
+            $post->set('content', $article->getContent());
 
-        ]);
+            $post->set('author', $article->getUserId());
 
+
+            return $this->view->render('edit_post', [
+                'post' => $post
+            ]);
         }
-
-        $post->set('id', $article->getId());
-
-        $post->set('title', $article->getTitle());
-
-        $post->set('content', $article->getContent());
-
-        $post->set('author', $article->getUserId());
-
-
-        return $this->view->render('edit_post', [
-            'post' => $post
-        ]);
-
-        
     }
 
     public function deletePost($id)
     {
-        $this->postDAO->deletePost($id);
+        if ($this->checkAdmin()) {
 
-        $this->session->set('delete_post', 'L\' article a bien été supprimé');
-        
-        header('Location: ../public/index.php?p=administration');
+            $this->postDAO->deletePost($id);
+
+            $this->session->set('delete_post', 'L\' article a bien été supprimé');
+
+            header('Location: ../public/index.php?p=administration');
+        }
     }
 
     public function unflagComment($commentId)
     {
-        $this->commentDAO->unflagComment($commentId);
-        $this->session->set('unflag_comment', 'Le commentaire a bien été désignalé');
-        header('Location: ../public/index.php?p=administration');
+        if ($this->checkAdmin()) {
+            $this->commentDAO->unflagComment($commentId);
+            $this->session->set('unflag_comment', 'Le commentaire a bien été désignalé');
+            header('Location: ../public/index.php?p=administration');
+        }
     }
 
     public function deleteComment($id)
     {
-        $this->commentDAO->deleteComment($id);
+        if ($this->checkAdmin()) {
+            $this->commentDAO->deleteComment($id);
 
-        $this->session->set('delete_comment', 'Le commentaire a bien été supprimé');
+            $this->session->set('delete_comment', 'Le commentaire a bien été supprimé');
 
-        header('Location: ../public/index.php');
+            header('Location: ../public/index.php');
+        }
     }
 
     public function profile()
     {
-        return $this->view->render('profile');
+        if ($this->checkLoggedIn()) {
+            return $this->view->render('profile');
+        }
     }
 
     public function updatePassword(Parameter $post)
     {
-        if($post->get('submit')) {
+        if ($this->checkLoggedIn()) {
+            if ($post->get('submit')) {
 
-            $this->userDAO->updatePassword($post, $this->session->get('pseudo'));
+                $this->userDAO->updatePassword($post, $this->session->get('pseudo'));
 
-            $this->session->set('update_password', 'Le mot de passe a été mis à jour');
+                $this->session->set('update_password', 'Le mot de passe a été mis à jour');
 
-            header('Location: ../public/index.php?p=profile');
+                header('Location: ../public/index.php?p=profile');
+            }
+            return $this->view->render('update_password');
         }
-        return $this->view->render('update_password');
     }
 
     public function logout()
     {
+        if($this->checkLoggedIn()) 
+        {
+
         $this->logoutOrDelete('logout');
 
+        }
     }
 
     public function deleteAccount()
     {
+        if($this->checkLoggedIn())
+        {
         $this->userDAO->deleteAccount($this->session->get('pseudo'));
 
         $this->logoutOrDelete('delete_account');
+        }
     }
 
     public function deleteUser($userId)
     {
+        if($this->checkAdmin()) 
+        {
         $this->userDAO->deleteUser($userId);
         $this->session->set('delete_user', 'L\'utilisateur a bien été supprimé');
         header('Location: ../public/index.php?p=administration');
+        }
     }
 
     private function logoutOrDelete($param)
     {
         $this->session->stop();
         $this->session->start();
-        if($param === 'logout') {
+        if ($param === 'logout') {
             $this->session->set($param, 'À bientôt');
         } else {
             $this->session->set($param, 'Votre compte a bien été supprimé');
@@ -158,21 +201,21 @@ class BackController extends Controller
 
     public function administration()
     {
-        $posts = $this->postDAO->getPosts();
+        if ($this->checkAdmin()) {
+            $posts = $this->postDAO->getPosts();
 
-        $comments = $this->commentDAO->getFlagComments();
+            $comments = $this->commentDAO->getFlagComments();
 
-        $users = $this->userDAO->getUsers();
+            $users = $this->userDAO->getUsers();
 
-        return $this->view->render('administration', [
+            return $this->view->render('administration', [
 
-            'posts' => $posts,
+                'posts' => $posts,
 
-            'comments' => $comments,
+                'comments' => $comments,
 
-            'users' => $users
-        ]);
+                'users' => $users
+            ]);
+        }
     }
-
-    
 }

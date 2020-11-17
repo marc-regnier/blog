@@ -124,7 +124,6 @@ class Router
             }
             else
             {
-                
                 $this->frontController->home();
             }
         }
