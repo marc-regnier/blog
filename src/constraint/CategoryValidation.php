@@ -13,9 +13,9 @@ class PostValidation extends Validation
         $this->constraint = new Constraint();
     }
 
-    public function check(Parameter $post)
+    public function check(Parameter $category)
     {
-        foreach ($post->all() as $key => $value) {
+        foreach ($category->all() as $key => $value) {
             $this->checkField($key, $value);
         }
         return $this->errors;
@@ -23,11 +23,11 @@ class PostValidation extends Validation
 
     private function checkField($name, $value)
     {
-        if($name === 'title') {
+        if($name === 'name') {
             $error = $this->checkTitle($name, $value);
             $this->addError($name, $error);
         }
-        elseif ($name === 'content') {
+        elseif ($name === 'slug') {
             $error = $this->checkContent($name, $value);
             $this->addError($name, $error);
         }
@@ -44,23 +44,23 @@ class PostValidation extends Validation
     private function checkTitle($name, $value)
     {
         if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('titre', $value);
+            return $this->constraint->notBlank('name', $value);
         }
         if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('titre', $value, 2);
+            return $this->constraint->minLength('name', $value, 2);
         }
         if($this->constraint->maxLength($name, $value, 255)) {
-            return $this->constraint->maxLength('titre', $value, 255);
+            return $this->constraint->maxLength('name', $value, 255);
         }
     }
 
     private function checkContent($name, $value)
     {
         if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('contenu', $value);
+            return $this->constraint->notBlank('slug', $value);
         }
         if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('contenu', $value, 2);
+            return $this->constraint->minLength('slug', $value, 2);
         }
     }
 

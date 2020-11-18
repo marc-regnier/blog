@@ -62,9 +62,9 @@ class Router
                 {
                     $this->backController->deletePost($this->request->getGet()->get('id'));
                 }
-                else if ($p === 'editCategory')
+                else if ($p === 'addCategory')
                 {
-                    $this->backController->editCategory($this->request->getPost(), $this->request->getGet()->get('id'));
+                    $this->backController->addCategory($this->request->getPost());
                 }
                 else if ($p === 'deleteCategory')
                 {

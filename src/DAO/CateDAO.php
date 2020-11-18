@@ -50,26 +50,12 @@ class CateDAO extends DAO
         return $this->buildObject($category);
     }
 
-    public function addCategory(Parameter $category, $id)
+    public function addCategory(Parameter $category)
     {
 
         $sql = 'INSERT INTO categories (name, slug) VALUES (?, ?)';
 
-        $this->createQuery($sql, [$category->get('name'), $id, $category->get('slug')]);
-    }
-
-    public function editCategory(Parameter $category, $id)
-    {
-        $sql = 'UPDATE categories SET name = :name, slug = :slug WHERE id=:id';
-
-        $this->createQuery($sql, [
-
-            'name' => $category->get('name'),
-
-            'slug' => $category->get('slug'),
-
-            'id' => $id
-        ]);
+        $this->createQuery($sql, [$category->get('name'), $category->get('slug')]);
     }
 
     public function deleteCategory($id)

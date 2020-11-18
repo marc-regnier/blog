@@ -116,6 +116,7 @@
 
 <h2>Categorie</h2>
 
+<a href="../public/index.php?p=addCategory">Ajouter</a>
 <table>
     <tr>
         <td>Id</td>
@@ -131,7 +132,7 @@
             <td><?= htmlspecialchars($category->getName());?></td>
             <td><?= htmlspecialchars($category->getSlug());?></td>
             <td>
-                <a href="../public/index.php?p=editCategory&id=<?= $category->getId(); ?>">Modifier</a>
+                
                 <a href="../public/index.php?p=deleteCategory&id=<?= $category->getId(); ?>">Supprimer</a>
             </td>
         </tr>

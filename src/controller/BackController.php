@@ -223,49 +223,7 @@ class BackController extends Controller
         }
     }
 
-    
 
-
-    public function editCategory(Parameter $category, $id)
-    {
-        if ($this->checkAdmin()) {
-
-            $cate = $this->cateDAO->getCategory($id);
-
-            if ($category->get('submit')) {
-                $errors = $this->validation->validate($category, 'category');
-
-                if (!$errors) {
-
-                    $this->cateDAO->editCategory($category, $id, $this->session->get('id'));
-
-                    $this->session->set('edit_cate', 'L\' article a bien été modifié');
-
-                    header('Location: ../public/index.php?p=administration');
-                }
-
-
-                return $this->view->render('edit_cate', [
-
-                    'category' => $category,
-
-                    'errors' => $errors
-
-                ]);
-            }
-
-            $category->set('id', $cate->getId());
-
-            $category->set('name', $cate->getName());
-
-            $category->set('slug', $cate->getSlug());
-
-
-            return $this->view->render('edit_cate', [
-                'category' => $category
-            ]);
-        }
-    }
 
     public function deleteCategory($id)
     {
@@ -276,6 +234,35 @@ class BackController extends Controller
             $this->session->set('delete_cate', 'La catégorie a bien été supprimé');
 
             header('Location: ../public/index.php?p=administration');
+        }
+    }
+
+    public function addCategory(Parameter $category)
+    {
+
+        if ($this->checkAdmin()) {
+            if ($category->get('submit')) {
+
+                $errors = $this->validation->validate($category, 'category');
+
+                if (!$errors) {
+
+                    $this->cateDAO->addCategory($category, $this->session->get('id'));
+
+                    $this->session->set('add_post', 'La nouvelle catégorie  a bien été ajouté');
+
+                    header('Location: ../public/index.php?p=administration');
+                }
+
+                return $this->view->render('add_Post', [
+
+                    'category' => $category,
+
+                    'errors' => $errors
+                ]);
+            }
+
+            return $this->view->render('add_cate');
         }
     }
 
