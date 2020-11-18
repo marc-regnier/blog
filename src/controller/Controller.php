@@ -6,6 +6,8 @@ use App\config\Request;
 
 use App\src\model\View;
 
+use App\src\DAO\CateDAO;
+
 use App\src\DAO\PostDAO;
 
 use App\src\DAO\UserDAO;
@@ -19,6 +21,8 @@ abstract class Controller
 {
 
     protected $postDAO;
+
+    protected $cateDAO;
 
     protected $commentDAO;
 
@@ -40,6 +44,8 @@ abstract class Controller
     public function __construct()
     {
         $this->postDAO = new PostDAO();
+
+        $this->cateDAO = new CateDAO();
 
         $this->commentDAO = new CommentDAO();
 

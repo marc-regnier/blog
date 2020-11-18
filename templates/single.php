@@ -5,7 +5,7 @@
     <p>En construction</p>
     <div>
         <h2><?= htmlspecialchars($post->getTitle()); ?></h2>
-        <p><?= htmlspecialchars($post->getUserId()); ?></p>
+        <p><?= htmlspecialchars($post->getAuthor()); ?></p>
         <p><?= htmlspecialchars($post->getContent()); ?></p>
         <p>Créé le : <?= htmlspecialchars($post->getCreatedAt()); ?></p>
     </div>

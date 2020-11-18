@@ -17,6 +17,7 @@ class FrontController extends Controller
         return $this->view->render('home', [
 
             'posts' => $posts
+            
         ]);
     }
 

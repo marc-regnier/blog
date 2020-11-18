@@ -94,7 +94,7 @@ class BackController extends Controller
 
             $post->set('content', $article->getContent());
 
-            $post->set('author', $article->getUserId());
+            $post->set('author', $article->getAuthor());
 
 
             return $this->view->render('edit_post', [
@@ -204,6 +204,8 @@ class BackController extends Controller
         if ($this->checkAdmin()) {
             $posts = $this->postDAO->getPosts();
 
+            $categories = $this->cateDAO->getCategories();
+
             $comments = $this->commentDAO->getFlagComments();
 
             $users = $this->userDAO->getUsers();
@@ -212,10 +214,70 @@ class BackController extends Controller
 
                 'posts' => $posts,
 
+                'categories' => $categories,
+
                 'comments' => $comments,
 
                 'users' => $users
             ]);
         }
     }
+
+    
+
+
+    public function editCategory(Parameter $category, $id)
+    {
+        if ($this->checkAdmin()) {
+
+            $cate = $this->cateDAO->getCategory($id);
+
+            if ($category->get('submit')) {
+                $errors = $this->validation->validate($category, 'category');
+
+                if (!$errors) {
+
+                    $this->cateDAO->editCategory($category, $id, $this->session->get('id'));
+
+                    $this->session->set('edit_cate', 'L\' article a bien été modifié');
+
+                    header('Location: ../public/index.php?p=administration');
+                }
+
+
+                return $this->view->render('edit_cate', [
+
+                    'category' => $category,
+
+                    'errors' => $errors
+
+                ]);
+            }
+
+            $category->set('id', $cate->getId());
+
+            $category->set('name', $cate->getName());
+
+            $category->set('slug', $cate->getSlug());
+
+
+            return $this->view->render('edit_cate', [
+                'category' => $category
+            ]);
+        }
+    }
+
+    public function deleteCategory($id)
+    {
+        if ($this->checkAdmin()) {
+
+            $this->cateDAO->deleteCategory($id);
+
+            $this->session->set('delete_cate', 'La catégorie a bien été supprimé');
+
+            header('Location: ../public/index.php?p=administration');
+        }
+    }
+
+
 }

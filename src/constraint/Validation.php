@@ -12,13 +12,19 @@ class Validation
             $errors = $postValidation->check($data);
             return $errors;
         }
-        elseif ($name === 'comment')
+        else if ($name === 'category')
+        {
+            $categoryValidation = new CommentValidation();
+            $errors = $categoryValidation->check($data);
+            return $errors;
+        }
+        else if ($name === 'comment')
         {
             $commentValidation = new CommentValidation();
             $errors = $commentValidation->check($data);
             return $errors;
         }
-        elseif ($name === 'user') {
+        else if ($name === 'user') {
             $userValidation = new UserValidation();
             $errors = $userValidation->check($data);
             return $errors;

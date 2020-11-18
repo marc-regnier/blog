@@ -35,15 +35,3 @@
 
 
 </div>
-
-<div class="col-sm-4">
-
-    <ul>
-
-        <li><a href=""></a></li>
-
-    </ul>
-
-</div>
-
-</div>

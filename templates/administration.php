@@ -15,6 +15,10 @@
 
 <?= $this->session->show('delete_user'); ?>
 
+<?= $this->session->show('edit_cate'); ?>
+
+<?= $this->session->show('delete_cate'); ?>
+
 <h2>Articles</h2>
 
 <table>
@@ -104,6 +108,32 @@
                 <?php
                 }
                 ?></td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>
+
+<h2>Categorie</h2>
+
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>slug</td>
+    </tr>
+    <?php
+    foreach ($categories as $category)
+    {
+        ?>
+        <tr>
+            <td><?= htmlspecialchars($category->getId());?></td>
+            <td><?= htmlspecialchars($category->getName());?></td>
+            <td><?= htmlspecialchars($category->getSlug());?></td>
+            <td>
+                <a href="../public/index.php?p=editCategory&id=<?= $category->getId(); ?>">Modifier</a>
+                <a href="../public/index.php?p=deleteCategory&id=<?= $category->getId(); ?>">Supprimer</a>
+            </td>
         </tr>
         <?php
     }

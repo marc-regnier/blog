@@ -27,8 +27,6 @@ class PostDAO extends DAO
 
         $result = $this->createQuery($sql);
 
-        var_dump($result);
-
         $posts = [];
 
         foreach ($result as $row) {
@@ -45,7 +43,8 @@ class PostDAO extends DAO
 
     public function getPost($id)
     {
-        $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at FROM posts INNER JOIN users ON posts.users_id = users.id WHERE posts.id = ?";
+        $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at, categories.name  FROM posts INNER JOIN users ON posts.users_id = users.id
+        INNER JOIN categories ON posts.category_id = categories.id WHERE posts.id = ?";
 
         $result = $this->createQuery($sql, [$id]);
 
