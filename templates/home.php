@@ -22,6 +22,8 @@
         ?>
             <div>
                 <h2><a href="index.php?p=post&id=<?= htmlspecialchars($post->getId()); ?>"><?= htmlspecialchars($post->getTitle()); ?></a></h2>
+                <p><?= htmlspecialchars($post->getAuthor()); ?></p>
+                <p><?= htmlspecialchars($post->getCategory()); ?></p>
                 <p><?= htmlspecialchars($post->getContent()); ?></p>
                 <p>Créé le : <?= htmlspecialchars($post->getCreatedAt()); ?></p>
             </div>

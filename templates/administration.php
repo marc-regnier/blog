@@ -34,7 +34,7 @@
             <td><?= htmlspecialchars($post->getId());?></td>
             <td><a href="../public/index.php?p=post&id=<?= htmlspecialchars($post->getId());?>"><?= htmlspecialchars($post->getTitle());?></a></td>
             <td><?= substr(htmlspecialchars($post->getContent()), 0, 150);?></td>
-            <td><?= htmlspecialchars($post->getUserId());?></td>
+            <td><?= htmlspecialchars($post->getAuthor());?></td>
             <td>Créé le : <?= htmlspecialchars($post->getCreatedAt());?></td>
             <td>
                 <a href="../public/index.php?p=editPost&id=<?= $post->getId(); ?>">Modifier</a>

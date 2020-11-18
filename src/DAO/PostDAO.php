@@ -14,16 +14,20 @@ class PostDAO extends DAO
         $post->setId($row['id']);
         $post->setTitle($row['title']);
         $post->setContent($row['content']);
-        $post->setUserId($row['pseudo']);
+        $post->setAuthor($row['pseudo']);
         $post->setCreatedAt($row['created_at']);
+        $post->setCategory($row['name']);
         return $post;
     }
 
     public function getPosts()
     {
-        $sql = 'SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at FROM posts INNER JOIN users ON posts.users_id = users.id ORDER BY posts.id DESC';
+        $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at, categories.name FROM posts INNER JOIN users ON posts.users_id = users.id 
+        INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC";
 
         $result = $this->createQuery($sql);
+
+        var_dump($result);
 
         $posts = [];
 

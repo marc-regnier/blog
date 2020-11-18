@@ -20,14 +20,20 @@ class Post
     private $content;
 
     /**
-     * @var int
+     * @var string
      */
-    private $userId;
+    private $author;
+
+    /**
+     * @var string
+     */
+    private $category;
 
     /**
      * @var \DateTime
      */
     private $createdAt;
+
 
     /**
      * @return int
@@ -78,19 +84,19 @@ class Post
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getUserId()
+    public function getAuthor()
     {
-        return $this->id;
+        return $this->author;
     }
 
     /**
-     * @param int $userId
+     * @param string $author
      */
-    public function setUserId($userId)
+    public function setAuthor($author)
     {
-        $this->userId = $userId;
+        $this->author = $author;
     }
 
     /**
@@ -107,5 +113,21 @@ class Post
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param int $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 }
