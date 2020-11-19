@@ -21,12 +21,13 @@
 
 <h2>Articles</h2>
 
-<table>
+<table class="table">
     <tr>
         <td>Id</td>
         <td>Titre</td>
         <td>Contenu</td>
         <td>Auteur</td>
+        <td>Catégorie</td>
         <td>Date</td>
         <td>Actions</td>
     </tr>
@@ -39,6 +40,7 @@
             <td><a href="../public/index.php?p=post&id=<?= htmlspecialchars($post->getId());?>"><?= htmlspecialchars($post->getTitle());?></a></td>
             <td><?= substr(htmlspecialchars($post->getContent()), 0, 150);?></td>
             <td><?= htmlspecialchars($post->getAuthor());?></td>
+            <td><?= htmlspecialchars($post->getCategory());?></td>
             <td>Créé le : <?= htmlspecialchars($post->getCreatedAt());?></td>
             <td>
                 <a href="../public/index.php?p=editPost&id=<?= $post->getId(); ?>">Modifier</a>
@@ -53,7 +55,7 @@
 
 <h2>Commentaires signalés</h2>
 
-<table>
+<table class="table">
     <tr>
         <td>Id</td>
         <td>Pseudo</td>
@@ -80,7 +82,7 @@
 
 <h2>Utilisateurs</h2>
 
-<table>
+<table class="table">
     <tr>
         <td>Id</td>
         <td>Pseudo</td>
@@ -117,7 +119,7 @@
 <h2>Categorie</h2>
 
 <a href="../public/index.php?p=addCategory">Ajouter</a>
-<table>
+<table class="table">
     <tr>
         <td>Id</td>
         <td>Name</td>

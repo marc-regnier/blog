@@ -22,6 +22,7 @@ class Session
             return $_SESSION[$name];
         }
     }
+    
 
     public function show($name)
     {

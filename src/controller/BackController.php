@@ -37,6 +37,8 @@ class BackController extends Controller
         if ($this->checkAdmin()) {
             if ($post->get('submit')) {
 
+                $categories = $this->cateDAO->getCategories();
+
                 $errors = $this->validation->validate($post, 'post');
 
                 if (!$errors) {
@@ -51,6 +53,8 @@ class BackController extends Controller
                 return $this->view->render('add_Post', [
 
                     'post' => $post,
+
+                    'categories' => $categories,
 
                     'errors' => $errors
                 ]);
