@@ -61,12 +61,13 @@ class PostDAO extends DAO
 
         $sql = 'INSERT INTO posts (title, users_id, content, category_id, created_at) VALUES (?, ?, ?, ?, NOW())';
 
-        $this->createQuery($sql, [$post->get('title'), $userId, $post->get('content')]);
+        $this->createQuery($sql, [$post->get('title'), $userId, $post->get('content'), $post->get('category_id')]);
+
     }
 
     public function editPost(Parameter $post, $id, $userId)
     {
-        $sql = 'UPDATE posts SET title = :title, content = :content, users_id = :user_id WHERE id=:id';
+        $sql = 'UPDATE posts SET title = :title, content = :content, users_id = :user_id, category_id = :category_id WHERE id=:id';
 
         $this->createQuery($sql, [
 
@@ -74,7 +75,11 @@ class PostDAO extends DAO
 
             'content' => $post->get('content'),
 
+            'category_id' => $post->get('category_id'),
+
             'user_id' => $userId,
+
+
 
             'id' => $id
         ]);

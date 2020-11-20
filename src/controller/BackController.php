@@ -31,24 +31,32 @@ class BackController extends Controller
     }
 
 
+
     public function addPost(Parameter $post)
     {
 
-        if ($this->checkAdmin()) {
-            if ($post->get('submit')) {
-
-                $categories = $this->cateDAO->getCategories();
+        if ($this->checkAdmin())
+        {
+            $categories = $this->cateDAO->getCategories();
+            
+            if ($post->get('submit'))
+            {
 
                 $errors = $this->validation->validate($post, 'post');
 
-                if (!$errors) {
+                $categories = $this->cateDAO->getCategories();
 
-                    $this->postDAO->addPost($post, $this->session->get('id'));;
+                if (!$errors)
+                {
+                    
+                    $this->postDAO->addPost($post, $this->session->get('id'));
 
                     $this->session->set('add_post', 'Le nouvel article a bien été ajouté');
 
                     header('Location: ../public/index.php?p=administration');
                 }
+
+                $categories = $this->cateDAO->getCategories();
 
                 return $this->view->render('add_Post', [
 
@@ -60,7 +68,9 @@ class BackController extends Controller
                 ]);
             }
 
-            return $this->view->render('add_post');
+            return $this->view->render('add_post', [
+                'categories' => $categories
+            ]);
         }
     }
 
@@ -69,6 +79,8 @@ class BackController extends Controller
         if ($this->checkAdmin()) {
 
             $article = $this->postDAO->getPost($id);
+
+            $categories = $this->cateDAO->getCategories();
 
             if ($post->get('submit')) {
                 $errors = $this->validation->validate($post, 'post');
@@ -100,9 +112,13 @@ class BackController extends Controller
 
             $post->set('author', $article->getAuthor());
 
+            $post->set('category_id', $article->getCategory());
+
 
             return $this->view->render('edit_post', [
-                'post' => $post
+                'post' => $post,
+
+                'categories' => $categories
             ]);
         }
     }
