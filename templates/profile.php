@@ -1,12 +1,15 @@
 <?php $this->title = 'Mon profil'; ?>
-<h1>Mon blog</h1>
-<p>En construction</p>
 <?= $this->session->show('update_password'); ?>
-<div>
-    <h2><?= $this->session->get('pseudo'); ?></h2>
-    <p><?= $this->session->get('id'); ?></p>
-    <a href="../public/index.php?p=updatePassword">Modifier son mot de passe</a>
-    <a href="../public/index.php?p=deleteAccount">Supprimer mon compte</a>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h1>Espace Membre</h1>
+            <h2><?= $this->session->get('pseudo'); ?></h2>
+            <a class="btn btn-primary btn-lg active" role="button" href="../public/index.php?p=updatePassword">Modifier son mot de passe</a>
+            <a class="btn btn-danger btn-lg active" href="../public/index.php?p=deleteAccount">Supprimer mon compte</a>
+        </div>
+    </div>
 </div>
 <br>
-<a href="../public/index.php">Retour à l'accueil</a>
