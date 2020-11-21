@@ -3,8 +3,6 @@
 <h1>Mon blog</h1>
 <p>En construction</p>
 
-<?= $this->session->show('add_post'); ?>
-
 <?= $this->session->show('edit_post'); ?>
 
 <?= $this->session->show('delete_post'); ?>
@@ -16,8 +14,6 @@
 <?= $this->session->show('delete_user'); ?>
 
 <?= $this->session->show('edit_cate'); ?>
-
-<?= $this->session->show('delete_cate'); ?>
 
 <h2>Articles</h2>
 
