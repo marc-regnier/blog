@@ -14,7 +14,7 @@
 
 <?= $this->session->show('delete_account'); ?>
 
-<div class="container">
+<div class="container ">
     <div class="col-md-12">
         <div class="row">
             <?php

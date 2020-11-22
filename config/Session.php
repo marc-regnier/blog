@@ -30,7 +30,7 @@ class Session
         {
             $key = $this->get($name);
             $this->remove($name);
-            return $key;
+            echo "<div class='alert alert-success' role='alert'>" . $key . "</div>";
         }
     }
 

@@ -2,7 +2,7 @@
 $route = isset($post) && $post->get('id') ? 'editPost&id=' . $post->get('id') : 'addPost';
 $submit = $route === 'addPost' ? 'Envoyer' : 'Mettre à jour';
 ?>
-<form method="post" action="../public/index.php?p=<?= $route; ?>">
+<form method="post" action="../public/index.php?p=<?= $route; ?>" enctype="multipart/form-data">
     <label for="title">Titre</label><br>
     <input class="form-control" type="text" id="title" name="title" value="<?= isset($post) ? htmlspecialchars($post->get('title')) : ''; ?>"><br>
     <?= isset($errors['title']) ? $errors['title'] : ''; ?>
@@ -19,5 +19,14 @@ $submit = $route === 'addPost' ? 'Envoyer' : 'Mettre à jour';
     }
     ?>    
     </select><br>
+    <div class="input-group mb-3">
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" name="file[]" id="inputGroupFile02">
+    <label class="custom-file-label" for="inputGroupFile02">Choisir une image</label>
+  </div>
+  <div class="input-group-append">
+    <span class="input-group-text" id="">Upload</span>
+  </div>
+</div>
     <input class="form-control btn btn-primary" type="submit" value="<?= $submit; ?>" id="submit" name="submit">
 </form>

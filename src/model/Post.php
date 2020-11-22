@@ -36,6 +36,14 @@ class Post
 
 
     /**
+     * @var string
+     */
+    private $feature_image;
+
+
+
+
+    /**
      * @return int
      */
     public function getId()
@@ -129,5 +137,21 @@ class Post
     public function setCategory($category)
     {
         $this->category = $category;
+    }
+
+    /**
+     * @return int
+     */
+    public function getImage()
+    {
+        return $this->feature_image;
+    }
+
+    /**
+     * @param int $feature_image
+     */
+    public function setImage($feature_image)
+    {
+        $this->feature_image = $feature_image;
     }
 }

@@ -13,6 +13,8 @@ class Request
         $this->post = new Parameter($_POST);
         
         $this->session = new Session($_SESSION);
+
+        $this->upload = new Upload($_FILES);
     }
 
     /**
@@ -38,5 +40,13 @@ class Request
     public function getSession()
     {
         return $this->session;
+    }
+
+    /**
+     * @return Upload
+     */
+    public function getUpload()
+    {
+        return $this->upload;
     }
 }

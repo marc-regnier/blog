@@ -38,6 +38,8 @@ abstract class Controller
 
     protected $session;
 
+    protected $upload;
+
     protected $validation;
 
 
@@ -62,6 +64,8 @@ abstract class Controller
         $this->post = $this->request->getPost();
         
         $this->session = $this->request->getSession();
+
+        $this->upload = $this->request->getUpload();
         
 
     }

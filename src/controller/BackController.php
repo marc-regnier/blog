@@ -49,7 +49,7 @@ class BackController extends Controller
                 if (!$errors)
                 {
                     
-                    $this->postDAO->addPost($post, $this->session->get('id'));
+                    $this->postDAO->addPost($post, $this->session->get('id'), $this->upload->uploadFile($_FILES['file']));
 
                     $this->session->set('add_post', 'Le nouvel article a bien été ajouté');
 
