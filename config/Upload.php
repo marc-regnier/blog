@@ -6,7 +6,8 @@ class Upload
 {
     private $upload;
 
-    private $supportedFormats = ['png', 'jpeg', 'jpg', 'gif'];
+    private $supportedFormats = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+
 
     public function __construct($upload)
     {
@@ -19,6 +20,7 @@ class Upload
         {
             if (in_array($file['type'], $this->supportedFormats)) 
             {
+                
                 move_uploaded_file($file['tmp_name'], '../uploads/'. $file['name']);
                 echo 'File has been uploaded';
             }

@@ -56,12 +56,12 @@ class PostDAO extends DAO
     }
 
 
-    public function addPost(Parameter $post, $userId)
+    public function addPost(Parameter $post, $userId, $image)
     {
 
         $sql = 'INSERT INTO posts (title, users_id, content, category_id, created_at, feature_image) VALUES (?, ?, ?, ?, NOW(), ?)';
 
-        $this->createQuery($sql, [$post->get('title'), $userId, $post->get('content'), $post->get('category_id'), $post->get('feature_image')]);
+        $this->createQuery($sql, [$post->get('title'), $userId, $post->get('content'), $post->get('category_id'), $image]);
 
     }
 

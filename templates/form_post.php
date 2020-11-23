@@ -21,7 +21,7 @@ $submit = $route === 'addPost' ? 'Envoyer' : 'Mettre à jour';
     </select><br>
     <div class="input-group mb-3">
   <div class="custom-file">
-    <input type="file" class="custom-file-input" name="file[]" id="inputGroupFile02">
+    <input type="file" class="custom-file-input" name="feature_image" id="inputGroupFile02">
     <label class="custom-file-label" for="inputGroupFile02">Choisir une image</label>
   </div>
   <div class="input-group-append">
