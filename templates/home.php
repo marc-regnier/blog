@@ -28,7 +28,7 @@
                         <p>Ecrit par : <?= htmlspecialchars($post->getAuthor()); ?></p>
                         <p><?= htmlspecialchars($post->getCategory()); ?></p>
                         <p class="card-text"><?= htmlspecialchars($post->getContent()); ?></p>
-                        <a href="index.php?p=single&id=<?= htmlspecialchars($post->getId()); ?>" class="btn btn-primary">Lire article</a>
+                        <a href="index.php?p=post&id=<?= htmlspecialchars($post->getId()); ?>" class="btn btn-primary">Lire article</a>
                     </div>
                 </div>
             <?php

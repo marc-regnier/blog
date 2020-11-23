@@ -21,11 +21,11 @@ $submit = $route === 'addPost' ? 'Envoyer' : 'Mettre à jour';
     </select><br>
     <div class="input-group mb-3">
   <div class="custom-file">
-    <input type="file" class="custom-file-input" name="feature_image" id="inputGroupFile02">
-    <label class="custom-file-label" for="inputGroupFile02">Choisir une image</label>
+    <input type="file" class="custom-file-input" name="feature_image" id="feature_image">
+    <label class="custom-file-label" for="feature_image"><?= isset($post) ? htmlspecialchars($post->get('feature_image')) : 'Choisir une image'; ?></label>
   </div>
   <div class="input-group-append">
-    <span class="input-group-text" id="">Upload</span>
+    <span class="input-group-text">Upload</span>
   </div>
 </div>
     <input class="form-control btn btn-primary" type="submit" value="<?= $submit; ?>" id="submit" name="submit">
