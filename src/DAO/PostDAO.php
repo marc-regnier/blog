@@ -58,10 +58,21 @@ class PostDAO extends DAO
 
     public function addPost(Parameter $post, $userId)
     {
+                    $file = $_FILES['feature_image'];
+                    $fileName = basename($_FILES["feature_image"]["name"]);
+                    $supportedFormats = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
 
-        $sql = "INSERT INTO posts (title, users_id, content, category_id, feature_image, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
+                    if (in_array($file['type'], $supportedFormats))
+                    {
 
-        $this->createQuery($sql, [$post->get('title'), $userId, $post->get('content'), $post->get('category_id'), $post->get('feature_image')]);
+                        if(move_uploaded_file($file['tmp_name'], '../uploads/'. $fileName))
+                        {
+                            $sql = "INSERT INTO posts (title, users_id, content, category_id, feature_image, created_at) VALUES (?, ?, ?, ?, '$fileName', NOW())";
+
+                            $this->createQuery($sql, [$post->get('title'), $userId, $post->get('content'), $post->get('category_id')]);
+                        }
+                    }
+        
 
     }
 

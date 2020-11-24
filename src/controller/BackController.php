@@ -49,12 +49,11 @@ class BackController extends Controller
                 if (!$errors)
                 {
                     $this->postDAO->addPost($post, $this->session->get('id'));
-
-                    $this->upload->uploadFile($_FILES['feature_image']);
-
+                        
                     $this->session->set('add_post', 'Le nouvel article a bien été ajouté');
 
                     header('Location: ../public/index.php?p=administration');
+
                 }
 
                 $categories = $this->cateDAO->getCategories();
