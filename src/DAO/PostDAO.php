@@ -78,20 +78,36 @@ class PostDAO extends DAO
 
     public function editPost(Parameter $post, $id, $userId)
     {
-        $sql = 'UPDATE posts SET title = :title, content = :content, users_id = :user_id, category_id = :category_id WHERE id=:id';
 
-        $this->createQuery($sql, [
+        $file = $_FILES['feature_image'];
+        $fileName = basename($_FILES["feature_image"]["name"]);
+        $supportedFormats = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
 
-            'title' => $post->get('title'),
+            if (in_array($file['type'], $supportedFormats))
+            {
 
-            'content' => $post->get('content'),
+                if(move_uploaded_file($file['tmp_name'], '../uploads/'. $fileName))
+                {
 
-            'category_id' => $post->get('category_id'),
+                    $sql = 'UPDATE posts SET title = :title, content = :content, users_id = :user_id, category_id = :category_id, feature_image = :feature_image WHERE id=:id';
 
-            'user_id' => $userId,
+                    $this->createQuery($sql, [
 
-            'id' => $id
-        ]);
+                    'title' => $post->get('title'),
+
+                    'content' => $post->get('content'),
+
+                    'category_id' => $post->get('category_id'),
+
+                    'feature_image' => $fileName,
+
+                    'user_id' => $userId,
+
+                    'id' => $id
+                    
+                    ]);
+                }
+            }
     }
 
     public function deletePost($id)

@@ -14,7 +14,6 @@ class Request
         
         $this->session = new Session($_SESSION);
 
-        $this->upload = new Upload($_FILES);
     }
 
     /**
@@ -42,11 +41,4 @@ class Request
         return $this->session;
     }
 
-    /**
-     * @return Upload
-     */
-    public function getUpload()
-    {
-        return $this->upload;
-    }
 }

@@ -65,7 +65,6 @@ abstract class Controller
         
         $this->session = $this->request->getSession();
 
-        $this->upload = $this->request->getUpload();
         
 
     }
