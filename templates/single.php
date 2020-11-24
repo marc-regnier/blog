@@ -4,7 +4,8 @@
     <h1>Mon blog</h1>
     <p>En construction</p>
     <div>
-        <h2><?= htmlspecialchars($post->getTitle()); ?></h2>
+        <h1><?= htmlspecialchars($post->getTitle()); ?></h1>
+        <img src="../uploads/<?= htmlspecialchars($post->getImage()); ?>" alt="<?= htmlspecialchars($post->getImage()); ?>">
         <p><?= htmlspecialchars($post->getAuthor()); ?></p>
         <p><?= htmlspecialchars($post->getContent()); ?></p>
         <p>Créé le : <?= htmlspecialchars($post->getCreatedAt()); ?></p>

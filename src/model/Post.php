@@ -140,7 +140,7 @@ class Post
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getImage()
     {
@@ -148,7 +148,7 @@ class Post
     }
 
     /**
-     * @param int $feature_image
+     * @param string $feature_image
      */
     public function setImage($feature_image)
     {

@@ -22,7 +22,7 @@
             foreach ($posts as $post) {
             ?>
                 <div class="card mb-4 mr-3" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <img class="card-img-top" src="../uploads/<?= htmlspecialchars($post->getImage()); ?>" alt="<?= htmlspecialchars($post->getImage()); ?>">
                     <div class="card-body">
                         <h3 class="card-title"><a href="index.php?p=post&id=<?= htmlspecialchars($post->getId()); ?>"><?= htmlspecialchars($post->getTitle()); ?></a></h3>
                         <p>Ecrit par : <?= htmlspecialchars($post->getAuthor()); ?></p>

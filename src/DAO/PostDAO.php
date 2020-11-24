@@ -16,13 +16,14 @@ class PostDAO extends DAO
         $post->setContent($row['content']);
         $post->setAuthor($row['pseudo']);
         $post->setCreatedAt($row['created_at']);
+        $post->setImage($row['feature_image']);
         $post->setCategory($row['name']);
         return $post;
     }
 
     public function getPosts()
     {
-        $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at, categories.name FROM posts INNER JOIN users ON posts.users_id = users.id 
+        $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at, categories.name, posts.feature_image FROM posts INNER JOIN users ON posts.users_id = users.id 
         INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC";
 
         $result = $this->createQuery($sql);
@@ -43,7 +44,7 @@ class PostDAO extends DAO
 
     public function getPost($id)
     {
-        $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at, categories.name  FROM posts INNER JOIN users ON posts.users_id = users.id
+        $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at, posts.feature_image, categories.name  FROM posts INNER JOIN users ON posts.users_id = users.id
         INNER JOIN categories ON posts.category_id = categories.id WHERE posts.id = ?";
 
         $result = $this->createQuery($sql, [$id]);
