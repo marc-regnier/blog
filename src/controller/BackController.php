@@ -52,7 +52,7 @@ class BackController extends Controller
                         
                     $this->session->set('add_post', 'Le nouvel article a bien été ajouté');
 
-                    header('Location: ../public/index.php?p=administration');
+                    header('Location: ../public/index.php?p=adminPost');
 
                 }
 
@@ -91,7 +91,7 @@ class BackController extends Controller
 
                     $this->session->set('edit_post', 'L\' article a bien été modifié');
 
-                    header('Location: ../public/index.php?p=administration');
+                    header('Location: ../public/index.php?p=adminPost');
                 }
 
 
@@ -131,7 +131,7 @@ class BackController extends Controller
 
             $this->session->set('delete_post', 'L\' article a bien été supprimé');
 
-            header('Location: ../public/index.php?p=administration');
+            header('Location: ../public/index.php?p=adminPost');
         }
     }
 
@@ -140,7 +140,7 @@ class BackController extends Controller
         if ($this->checkAdmin()) {
             $this->commentDAO->unflagComment($commentId);
             $this->session->set('unflag_comment', 'Le commentaire a bien été désignalé');
-            header('Location: ../public/index.php?p=administration');
+            header('Location: ../public/index.php?p=adminComment');
         }
     }
 
@@ -203,7 +203,7 @@ class BackController extends Controller
         {
         $this->userDAO->deleteUser($userId);
         $this->session->set('delete_user', 'L\'utilisateur a bien été supprimé');
-        header('Location: ../public/index.php?p=administration');
+        header('Location: ../public/index.php?p=adminUser');
         }
     }
 
@@ -219,26 +219,54 @@ class BackController extends Controller
         header('Location: ../public/index.php');
     }
 
-    public function administration()
+    public function adminUser()
     {
         if ($this->checkAdmin()) {
-            $posts = $this->postDAO->getPosts();
-
-            $categories = $this->cateDAO->getCategories();
-
-            $comments = $this->commentDAO->getFlagComments();
 
             $users = $this->userDAO->getUsers();
 
-            return $this->view->render('administration', [
-
-                'posts' => $posts,
-
-                'categories' => $categories,
-
-                'comments' => $comments,
+            return $this->view->render('adminUser', [
 
                 'users' => $users
+            ]);
+        }
+    }
+
+    public function adminPost()
+    {
+        if ($this->checkAdmin()) 
+        {
+            $posts = $this->postDAO->getPosts();
+
+            return $this->view->render('adminPost', [
+
+                'posts' => $posts
+            ]);
+        }
+    }
+
+    public function adminCate()
+    {
+        if ($this->checkAdmin()) 
+        {
+            $categories = $this->cateDAO->getCategories();
+
+            return $this->view->render('adminCate', [
+
+                'categories' => $categories
+            ]);
+        }
+    }
+    
+    public function adminComment()
+    {
+        if ($this->checkAdmin()) 
+        {
+            $comments = $this->commentDAO->getFlagComments();
+
+            return $this->view->render('adminComment', [
+
+                'comments' => $comments
             ]);
         }
     }
@@ -253,7 +281,7 @@ class BackController extends Controller
 
             $this->session->set('delete_cate', 'La catégorie a bien été supprimé');
 
-            header('Location: ../public/index.php?p=administration');
+            header('Location: ../public/index.php?p=adminCate');
         }
     }
 
@@ -271,7 +299,7 @@ class BackController extends Controller
 
                     $this->session->set('add_post', 'La nouvelle catégorie  a bien été ajouté');
 
-                    header('Location: ../public/index.php?p=administration');
+                    header('Location: ../public/index.php?p=adminCate');
                 }
 
                 return $this->view->render('add_Post', [

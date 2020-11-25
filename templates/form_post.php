@@ -7,7 +7,7 @@ $submit = $route === 'addPost' ? 'Envoyer' : 'Mettre à jour';
     <input class="form-control" type="text" id="title" name="title" value="<?= isset($post) ? htmlspecialchars($post->get('title')) : ''; ?>"><br>
     <?= isset($errors['title']) ? $errors['title'] : ''; ?>
     <label for="content">Contenu</label><br>
-    <textarea class="form-control" id="content" name="content"><?= isset($post) ? htmlspecialchars($post->get('content')) : ''; ?></textarea><br>
+    <textarea class="form-control" id="content" rows="10" cols="15" name="content"><?= isset($post) ? htmlspecialchars($post->get('content')) : ''; ?></textarea><br>
     <?= isset($errors['content']) ? $errors['content'] : ''; ?>
     <label for="category_id">Catégories</label><br> 
     <select name="category_id" id="category_id" class="form-control">'

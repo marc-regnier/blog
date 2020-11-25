@@ -120,10 +120,25 @@ class Router
                 {
                     $this->backController->deleteUser($this->request->getGet()->get('id'));
                 }
-                else if($p === 'administration')
+                else if($p === 'adminPost')
                 {
 
-                    $this->backController->administration();
+                    $this->backController->adminPost();
+                }
+                else if($p === 'adminCate')
+                {
+
+                    $this->backController->adminCate();
+                }
+                else if($p === 'adminUser')
+                {
+
+                    $this->backController->adminUser();
+                }
+                else if($p === 'adminComment')
+                {
+
+                    $this->backController->adminComment();
                 }
                 else
                 {

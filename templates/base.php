@@ -30,12 +30,17 @@ if ($this->session->get('pseudo')) {
         <a class="nav-link" href="../public/index.php?p=profile">Profil</a>
     </li>
     <?php if($this->session->get('roles') === 'admin') { ?>
-    <li class="nav-item active">
-        <a class="nav-link" href="../public/index.php?p=administration">Administration</a>
-    </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="../public/index.php?p=addPost">Ajouter un article</a>
-    </li>
+    <div class="dropdown show">
+    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Administration
+    </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="../public/index.php?p=adminPost">Admin-Post</a>
+        <a class="dropdown-item" href="../public/index.php?p=adminCate">Admin-Categorie</a>
+        <a class="dropdown-item" href="../public/index.php?p=adminComment">Admin-Comment</a>
+        <a class="dropdown-item" href="../public/index.php?p=adminUser">Admin-User</a>
+      </div>  
+    </div>
     <?php } ?>
 <?php
 } else {
@@ -62,7 +67,8 @@ if ($this->session->get('pseudo')) {
     </div>
 
 </div>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 
 </html>
