@@ -11,12 +11,8 @@
         <p>Créé le : <?= htmlspecialchars($post->getCreatedAt()); ?></p>
     </div>
     <br>
-    <div class="actions">
-        <a href="../public/index.php?p=editPost&id=<?= $post->getId(); ?>">Modifier</a>
-    </div>
     <br>
     <a href="index.php">Retour à l'accueil</a>
-    <a href="../public/index.php?p=deletePost&id=<?= $post->getId(); ?>">Supprimer</a>
 </div>
 
 <div id="comments" class="text-left" style="margin-left: 50px">

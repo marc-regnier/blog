@@ -21,13 +21,19 @@
 
             foreach ($posts as $post) {
             ?>
-                <div class="card mb-4 mr-3" style="width: 18rem;">
-                    <img class="card-img-top" src="../uploads/<?= htmlspecialchars($post->getImage()); ?>" alt="<?= htmlspecialchars($post->getImage()); ?>">
+                <div class="card mb-4 mr-3" style="width: 300px;">
+                    <div class="view overlay" >
+                        <img style="width: 300px;" class="card-img-top" src="../uploads/<?= htmlspecialchars($post->getImage()); ?>" alt="<?= htmlspecialchars($post->getImage()); ?>">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
                     <div class="card-body">
                         <h3 class="card-title"><a href="index.php?p=post&id=<?= htmlspecialchars($post->getId()); ?>"><?= htmlspecialchars($post->getTitle()); ?></a></h3>
                         <p>Ecrit par : <?= htmlspecialchars($post->getAuthor()); ?></p>
                         <p><?= htmlspecialchars($post->getCategory()); ?></p>
-                        <p class="card-text"><?= htmlspecialchars($post->getContent()); ?></p>
+                        <p class="card-text"><?= htmlspecialchars(substr($post->getContent(), 50)); ?> ...</p>
                         <a href="index.php?p=post&id=<?= htmlspecialchars($post->getId()); ?>" class="btn btn-primary">Lire article</a>
                     </div>
                 </div>
