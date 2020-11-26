@@ -2,9 +2,13 @@
 
 namespace App\src\DAO;
 
+
 use App\src\model\Post;
 
 use App\config\Parameter;
+
+use App\config\Pagination;
+
 
 class PostDAO extends DAO
 {
@@ -21,10 +25,18 @@ class PostDAO extends DAO
         return $post;
     }
 
+
+
     public function getPosts()
     {
+
+        $totalRecords = "SELECT COUNT(id) FROM posts";
+        $paginator = new Pagination();
+        $paginator->total = $totalRecords;
+        $paginator->paginate();
+
         $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at, categories.name, posts.feature_image FROM posts INNER JOIN users ON posts.users_id = users.id 
-        INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC";
+        INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC LIMIT 0,5";
 
         $result = $this->createQuery($sql);
 
@@ -110,6 +122,7 @@ class PostDAO extends DAO
                 }
             }
     }
+
 
     public function deletePost($id)
     {
