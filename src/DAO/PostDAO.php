@@ -30,10 +30,22 @@ class PostDAO extends DAO
     public function getPosts()
     {
 
-        $totalRecords = "SELECT COUNT(id) FROM posts";
-        $paginator = new Pagination();
-        $paginator->total = $totalRecords;
-        $paginator->paginate();
+        if(isset($_GET['current']) && !empty($_GET['current']))
+        {
+            $currentPage = strip_tags($_GET['current']);
+        }
+        else
+        {
+            $currentPage = 1;
+        }
+
+        $sql = "SELECT COUNT(id) as nb_posts FROM posts";
+        $query = $this->createQuery($sql);
+        $result = $query->fetch();
+        $nbPosts = $result['nb_posts'];
+        $perPage = 10;
+        $pages = ceil($nbPosts / $perPage);
+        $first = ($currentPage * $perPage) - $perPage;
 
         $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at, categories.name, posts.feature_image FROM posts INNER JOIN users ON posts.users_id = users.id 
         INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC LIMIT 0,5";
