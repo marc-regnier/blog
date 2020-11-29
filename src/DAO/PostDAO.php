@@ -7,7 +7,7 @@ use App\src\model\Post;
 
 use App\config\Parameter;
 
-use App\config\Pagination;
+use App\src\DAO\Pagination;
 
 
 class PostDAO extends DAO
@@ -30,27 +30,38 @@ class PostDAO extends DAO
     public function getPosts()
     {
 
-        if(isset($_GET['current']) && !empty($_GET['current']))
-        {
-            $currentPage = strip_tags($_GET['current']);
-        }
-        else
-        {
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $currentPage = (int) strip_tags($_GET['page']);
+        }else{
             $currentPage = 1;
         }
 
-        $sql = "SELECT COUNT(id) as nb_posts FROM posts";
-        $query = $this->createQuery($sql);
-        $result = $query->fetch();
-        $nbPosts = $result['nb_posts'];
-        $perPage = 10;
-        $pages = ceil($nbPosts / $perPage);
-        $first = ($currentPage * $perPage) - $perPage;
+       $sql = 'SELECT COUNT(*) AS nb_posts FROM posts';
+
+       $query = $this->createQuery($sql);
+
+       $result = $query->fetch();
+
+       $nbPosts = (int) $result['nb_posts'];
+
+       $perPage = 6;
+
+       $pages = ceil($nbPosts / $perPage);
+
+       $first = ($currentPage * $perPage) - $perPage;
+
+      // $start = 0;
+
+      // $pagination = new Pagination('posts');
+
 
         $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at, categories.name, posts.feature_image FROM posts INNER JOIN users ON posts.users_id = users.id 
-        INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC LIMIT 0,5";
+        INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC LIMIT :first, :perpage";
 
-        $result = $this->createQuery($sql);
+        /*$result = $pagination->get_data($sql);
+
+        var_dump($result);*/
+        $result = $this->createPage($sql, $first, $perPage);
 
         $posts = [];
 
@@ -60,8 +71,6 @@ class PostDAO extends DAO
 
             $posts[$id] = $this->buildObject($row);
         }
-
-        $result->closeCursor();
 
         return $posts;
     }
