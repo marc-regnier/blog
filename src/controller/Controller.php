@@ -16,6 +16,7 @@ use App\src\DAO\CommentDAO;
 
 use App\src\constraint\Validation;
 
+use App\src\DAO\Pagination;
 
 abstract class Controller
 {
@@ -42,6 +43,8 @@ abstract class Controller
 
     protected $validation;
 
+    protected $pagination;
+
 
     public function __construct()
     {
@@ -58,6 +61,8 @@ abstract class Controller
         $this->request = new Request();
 
         $this->validation = new Validation();
+
+        $this->pagination = new Pagination();
 
         $this->get = $this->request->getGet();
 

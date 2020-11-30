@@ -49,24 +49,12 @@ abstract class DAO
         return $result;
     }
 
-    protected function createPage($sql, $first, $perPage)
-    {
-        
-        $query = $this->checkConnection()->prepare($sql);
-        $query->bindValue(':first', $first, PDO::PARAM_INT);
-        $query->bindValue(':perpage', $perPage, PDO::PARAM_INT);    
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
-
-    }
-
     protected function createPaginate($sql)
     {
         
         $query = $this->checkConnection()->prepare($sql);    
         $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_OBJ);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
 
     }

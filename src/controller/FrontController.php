@@ -14,9 +14,13 @@ class FrontController extends Controller
 
         $posts = $this->postDAO->getPosts();
 
+        $pages = $this->pagination->get_pagination_number();
+
         return $this->view->render('home', [
 
             'posts' => $posts,
+
+            'pages' => $pages
             
             
         ]);

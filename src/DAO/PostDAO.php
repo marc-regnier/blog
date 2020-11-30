@@ -30,38 +30,21 @@ class PostDAO extends DAO
     public function getPosts()
     {
 
-        if(isset($_GET['page']) && !empty($_GET['page'])){
-            $currentPage = (int) strip_tags($_GET['page']);
-        }else{
-            $currentPage = 1;
-        }
 
-       $sql = 'SELECT COUNT(*) AS nb_posts FROM posts';
+       $start = 0;
+       $table = "posts";
 
-       $query = $this->createQuery($sql);
-
-       $result = $query->fetch();
-
-       $nbPosts = (int) $result['nb_posts'];
-
-       $perPage = 6;
-
-       $pages = ceil($nbPosts / $perPage);
-
-       $first = ($currentPage * $perPage) - $perPage;
-
-      // $start = 0;
-
-      // $pagination = new Pagination('posts');
+       $pagination = new Pagination();
+       $pagination->set_total_records($table);
 
 
         $sql = "SELECT posts.id, posts.title, users.pseudo, posts.content, posts.created_at, categories.name, posts.feature_image FROM posts INNER JOIN users ON posts.users_id = users.id 
-        INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC LIMIT :first, :perpage";
+        INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC LIMIT $start, $pagination->perPage";
 
-        /*$result = $pagination->get_data($sql);
+        $result = $pagination->get_data($sql);
+        $pages = $pagination->get_pagination_number();
 
-        var_dump($result);*/
-        $result = $this->createPage($sql, $first, $perPage);
+
 
         $posts = [];
 
@@ -74,6 +57,7 @@ class PostDAO extends DAO
 
         return $posts;
     }
+
 
     public function getPost($id)
     {

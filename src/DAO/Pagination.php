@@ -11,23 +11,17 @@ class Pagination extends DAO
 
     private $total_records;
 
-    private $perPage = 6;
+    public $perPage = 6;
 
-    public function __construct($table)
-    {
-        $this->table = $table;
-        $this->set_total_records();
-    }
 
-    public function set_total_records()
+    public function set_total_records($table)
     {
-        $sql = 'SELECT COUNT(*) AS nb_posts FROM posts';
+        $sql = "SELECT id FROM $table";
 
        $query = $this->createQuery($sql);
 
-       $result = $query->fetch();
+       $this->total_records = $query->rowCount();
 
-       $nbPosts = (int) $result['nb_posts'];
 
     }
 
@@ -53,7 +47,13 @@ class Pagination extends DAO
 
     public function get_pagination_number()
     {
+       // var_dump($this->perPage);
+
+       // var_dump($this->total_records);
+        
         return ceil($this->total_records / $this->perPage);
+
+        
     }
    
     
