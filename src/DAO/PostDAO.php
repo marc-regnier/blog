@@ -33,7 +33,6 @@ class PostDAO extends DAO
 
        $start = 0;
        $table = "posts";
-
        $pagination = new Pagination();
        $pagination->set_total_records($table);
 
@@ -42,9 +41,7 @@ class PostDAO extends DAO
         INNER JOIN categories ON posts.category_id = categories.id ORDER BY posts.id DESC LIMIT $start, $pagination->perPage";
 
         $result = $pagination->get_data($sql);
-        $pages = $pagination->get_pagination_number();
-
-
+        
 
         $posts = [];
 
@@ -56,6 +53,7 @@ class PostDAO extends DAO
         }
 
         return $posts;
+        
     }
 
 

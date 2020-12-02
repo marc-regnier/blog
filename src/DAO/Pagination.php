@@ -38,6 +38,9 @@ class Pagination extends DAO
         if($this->currentPage() > 1)
         {
             $start = ($this->currentPage() * $this->perPage) - $this->perPage;
+
+            var_dump($start);
+            
         }
 
             $stmt = $this->createPaginate($sql);
@@ -47,12 +50,8 @@ class Pagination extends DAO
 
     public function get_pagination_number()
     {
-       // var_dump($this->perPage);
-
-       // var_dump($this->total_records);
         
         return ceil($this->total_records / $this->perPage);
-
         
     }
    

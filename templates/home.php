@@ -1,4 +1,7 @@
-<?php $this->title = "Accueil"; ?>
+<?php 
+
+
+$this->title = "Accueil"; ?>
 
 <?= $this->session->show('add_comment'); ?>
 
@@ -44,7 +47,7 @@
         <div>
        
     <?php
-     for($page = 1; $page<=$pages; $page++)
+     for($page = 0; $page<=$pages; $page++)
      {?>
         <a href="index.php?page=<?= $page;?>"><?= $page; ?></a>
     <?php
